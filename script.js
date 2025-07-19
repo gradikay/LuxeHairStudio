@@ -754,43 +754,33 @@ class StoreHoursManager {
     }
 
     updateCountdown() {
-        if (!this.storeData) return;
-
-        const currentDay = this.getCurrentDay();
-        const dayHours = this.storeData.hours[currentDay];
-
-        // Only show countdown if store is open and closing soon
-        if (!dayHours || !dayHours.isOpen) {
-            this.countdownElement.style.display = 'none';
-            return;
-        }
-
         const now = new Date();
-        const currentMinutes = now.getHours() * 60 + now.getMinutes();
-        const closeMinutes = this.timeStringToMinutes(dayHours.closeTime);
-        const minutesUntilClose = closeMinutes - currentMinutes;
-        const warningMinutes = this.storeData.closingSoonWarning || 60;
-
-        console.log('Debug:', {currentMinutes, closeMinutes, minutesUntilClose, warningMinutes});
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
         
-        if (minutesUntilClose > 0 && minutesUntilClose <= warningMinutes) {
-            // Show countdown
-            console.log('Showing countdown timer!');
-            this.countdownElement.style.display = 'block';
-            
-            const now = new Date();
-            const totalSecondsUntilClose = (minutesUntilClose * 60) - now.getSeconds();
-            
-            const hours = Math.floor(totalSecondsUntilClose / 3600);
-            const minutes = Math.floor((totalSecondsUntilClose % 3600) / 60);
-            const seconds = totalSecondsUntilClose % 60;
-
-            this.timerHours.textContent = hours.toString().padStart(2, '0');
-            this.timerMinutes.textContent = minutes.toString().padStart(2, '0');
-            this.timerSeconds.textContent = Math.max(0, seconds).toString().padStart(2, '0');
-        } else {
-            this.countdownElement.style.display = 'none';
+        // Calculate time until 7:15 PM (19:15)
+        const closeTime = new Date();
+        closeTime.setHours(19, 15, 0, 0);
+        
+        // If it's past closing time, set for next day
+        if (now > closeTime) {
+            closeTime.setDate(closeTime.getDate() + 1);
         }
+        
+        const timeDiff = closeTime - now;
+        const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
+        const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        
+        // Update timer display
+        const timerHours = document.getElementById('timer-hours');
+        const timerMinutes = document.getElementById('timer-minutes');
+        const timerSeconds = document.getElementById('timer-seconds');
+        
+        if (timerHours) timerHours.textContent = hoursLeft.toString().padStart(2, '0');
+        if (timerMinutes) timerMinutes.textContent = minutesLeft.toString().padStart(2, '0');
+        if (timerSeconds) timerSeconds.textContent = secondsLeft.toString().padStart(2, '0');
     }
 
     showError() {
@@ -801,7 +791,15 @@ class StoreHoursManager {
 
 // Initialize store hours manager when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new StoreHoursManager();
+    const manager = new StoreHoursManager();
+    
+    // Start the countdown timer immediately
+    setInterval(() => {
+        manager.updateCountdown();
+    }, 1000);
+    
+    // Initial call
+    manager.updateCountdown();
 });
 
 // Add mobile-first touch events for all buttons and interactive elements
