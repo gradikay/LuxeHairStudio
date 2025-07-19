@@ -607,10 +607,11 @@ class StoreHoursManager {
 
     getCurrentTime() {
         const now = new Date();
+        const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
         return {
             hours: now.getHours(),
             minutes: now.getMinutes(),
-            timeString: now.toTimeString().substring(0, 5)
+            timeString: timeString
         };
     }
 
@@ -764,18 +765,11 @@ class StoreHoursManager {
             return;
         }
 
-        const currentMinutes = this.timeStringToMinutes(this.getCurrentTime().timeString);
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
         const closeMinutes = this.timeStringToMinutes(dayHours.closeTime);
         const minutesUntilClose = closeMinutes - currentMinutes;
         const warningMinutes = this.storeData.closingSoonWarning || 60;
-
-        console.log('Countdown Debug:', {
-            currentMinutes,
-            closeMinutes,
-            minutesUntilClose,
-            warningMinutes,
-            shouldShow: minutesUntilClose > 0 && minutesUntilClose <= warningMinutes
-        });
 
         if (minutesUntilClose > 0 && minutesUntilClose <= warningMinutes) {
             // Show countdown
