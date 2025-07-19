@@ -129,6 +129,7 @@ Buttons should be very girly with sparkle effects, gradients, and handwritten fo
 - Converted all 11 images from PNG to WebP format for 93% file size reduction (42MB → 3MB)
 - Enhanced iOS Safari form styling with aggressive CSS overrides for select dropdown and date inputs
 - Created custom contact links with white styling that remain functional for phone calls and emails
+- Added comprehensive security script to protect against inspection tools and content copying
 
 ## Technical Notes
 
