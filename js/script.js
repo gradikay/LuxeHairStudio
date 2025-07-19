@@ -324,27 +324,54 @@ serviceCards.forEach(card => {
 // Gallery Item Click to Enlarge (Modal functionality) - Mobile First
 const galleryItems = document.querySelectorAll('.gallery-item');
 galleryItems.forEach(item => {
-    // Mouse events
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    let touchMoved = false;
+    
+    // Mouse events for desktop
     item.addEventListener('click', () => {
         const img = item.querySelector('img');
         const modal = createImageModal(img.src, img.alt);
         document.body.appendChild(modal);
     });
     
-    // Touch events for mobile
-    item.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        const img = item.querySelector('img');
-        const modal = createImageModal(img.src, img.alt);
-        document.body.appendChild(modal);
-    });
-    
-    // Touch hover effect
-    item.addEventListener('touchstart', () => {
+    // Touch events for mobile - prevent scrolling interference
+    item.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+        touchMoved = false;
         item.style.transform = 'scale(1.05)';
     });
     
-    item.addEventListener('touchend', () => {
+    item.addEventListener('touchmove', (e) => {
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const moveDistance = Math.sqrt(
+            Math.pow(currentX - touchStartX, 2) + 
+            Math.pow(currentY - touchStartY, 2)
+        );
+        
+        // If user moved more than 10px, it's a scroll, not a tap
+        if (moveDistance > 10) {
+            touchMoved = true;
+            item.style.transform = 'scale(1)'; // Reset scale during scroll
+        }
+    });
+    
+    item.addEventListener('touchend', (e) => {
+        const touchDuration = Date.now() - touchStartTime;
+        
+        // Only open modal if it was a quick tap (less than 500ms) and no movement
+        if (!touchMoved && touchDuration < 500) {
+            e.preventDefault();
+            const img = item.querySelector('img');
+            const modal = createImageModal(img.src, img.alt);
+            document.body.appendChild(modal);
+        }
+        
+        // Reset transform after a delay
         setTimeout(() => {
             item.style.transform = 'scale(1)';
         }, 300);
