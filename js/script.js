@@ -1097,6 +1097,12 @@ class StoreHoursManager {
                     if (timerMinutes) timerMinutes.textContent = minutesLeft.toString().padStart(2, '0');
                     if (timerSeconds) timerSeconds.textContent = secondsLeft.toString().padStart(2, '0');
                     
+                    // Update countdown labels for closing soon
+                    const countdownTitle = countdownContainer.querySelector('.countdown-title');
+                    const timerLabel = countdownContainer.querySelector('.timer-label');
+                    if (countdownTitle) countdownTitle.textContent = 'Closing Soon!';
+                    if (timerLabel) timerLabel.textContent = 'Until we close - Book now!';
+                    
                     countdownContainer.style.display = 'block';
                 } else {
                     countdownContainer.style.display = 'none';
@@ -1126,6 +1132,12 @@ class StoreHoursManager {
                         if (timerHours) timerHours.textContent = hoursLeft.toString().padStart(2, '0');
                         if (timerMinutes) timerMinutes.textContent = minutesLeft.toString().padStart(2, '0');
                         if (timerSeconds) timerSeconds.textContent = secondsLeft.toString().padStart(2, '0');
+                        
+                        // Update countdown labels for opening soon
+                        const countdownTitle = countdownContainer.querySelector('.countdown-title');
+                        const timerLabel = countdownContainer.querySelector('.timer-label');
+                        if (countdownTitle) countdownTitle.textContent = 'Opening Soon!';
+                        if (timerLabel) timerLabel.textContent = 'Until we open - Book now!';
                         
                         countdownContainer.style.display = 'block';
                     } else {
