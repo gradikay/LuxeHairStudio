@@ -9,7 +9,7 @@ Your website automatically shows customers:
 - ⚠️ **"Closing Soon"** with a countdown timer before closing
 - 🕐 **Exact hours** for today and when you'll be open next
 
-All of this updates automatically by reading your `store-hours.json` file - no programming needed!
+All of this updates automatically from data built into your website - no external files needed!
 
 ## 📋 Step-by-Step Instructions
 
@@ -26,11 +26,12 @@ All of this updates automatically by reading your `store-hours.json` file - no p
 
 ### 🔧 How to Change Your Hours
 
-1. **Find the file:** Look for `store-hours.json` in your website files
+1. **Find the file:** Look for `js/script.js` in your website files
 2. **Make a backup:** Copy the file before making changes (just in case!)
-3. **Edit carefully:** Change times using the format above
-4. **Save the file:** The website updates automatically
-5. **Check it works:** Visit your website to see the changes
+3. **Find the data:** Look for `this.storeData = {` around line 755
+4. **Edit carefully:** Change times using the format above
+5. **Save the file:** The website updates automatically
+6. **Check it works:** Visit your website to see the changes
 
 ### 📅 Setting Up Each Day
 

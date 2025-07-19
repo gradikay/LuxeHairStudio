@@ -23,28 +23,30 @@ This guide will help you personalize your hair salon website to match your brand
 ```
 
 ### 3. Store Hours Configuration
-**File: `store-hours.json`**
-```json
-{
-  "storeHours": {
-    "monday": {"open": "09:00", "close": "18:00"},
-    "tuesday": {"open": "09:00", "close": "18:00"},
-    "wednesday": {"open": "09:00", "close": "18:00"},
-    "thursday": {"open": "09:00", "close": "18:00"},
-    "friday": {"open": "09:00", "close": "18:00"},
-    "saturday": {"open": "09:00", "close": "17:00"},
-    "sunday": {"open": "closed", "close": "closed"}
-  },
-  "closingSoonWarning": 60,
+**File: `js/script.js`** (around line 755, look for `this.storeData = {`)
+```javascript
+"hours": {
+  "monday": {"isOpen": false, "openTime": null, "closeTime": null},
+  "tuesday": {"isOpen": true, "openTime": "09:00", "closeTime": "18:30"},
+  "wednesday": {"isOpen": true, "openTime": "09:00", "closeTime": "19:00"},
+  "thursday": {"isOpen": true, "openTime": "09:00", "closeTime": "19:00"},
+  "friday": {"isOpen": true, "openTime": "09:00", "closeTime": "19:00"},
+  "saturday": {"isOpen": true, "openTime": "08:00", "closeTime": "19:25"},
+  "sunday": {"isOpen": false, "openTime": null, "closeTime": null}
+},
+"closingSoonWarning": 60,
+"specialHours": {
   "holidays": [
-    {"date": "2025-12-25", "name": "Christmas Day"},
-    {"date": "2025-01-01", "name": "New Year's Day"}
+    {"date": "2025-12-25", "name": "Christmas Day", "isOpen": false},
+    {"date": "2025-01-01", "name": "New Year's Day", "isOpen": false}
   ],
-  "vacationPeriods": [
-    {"start": "2025-07-15", "end": "2025-07-22", "reason": "Summer Vacation"}
+  "vacation": [
+    {"startDate": "2025-08-15", "endDate": "2025-08-22", "reason": "Summer Vacation"}
   ]
 }
 ```
+
+**Note:** Store hours are now embedded directly in the JavaScript file for better static hosting compatibility. No external JSON files are needed.
 
 ---
 

@@ -4,33 +4,34 @@ This document provides detailed technical information about the store hours conf
 
 ## Overview
 
-The store hours system automatically displays your current business status (Open/Closed), today's hours, countdown timer when closing soon, and handles holidays and vacation periods. All data is stored in `store-hours.json` and updates in real-time.
+The store hours system automatically displays your current business status (Open/Closed), today's hours, countdown timer when closing soon, and handles holidays and vacation periods. All data is embedded directly in the JavaScript file (`js/script.js`) for static hosting compatibility and updates in real-time.
 
-## Configuration File: store-hours.json
+## Configuration Data: Embedded in js/script.js
 
 ### Complete Structure
 
-```json
-{
+Located in `js/script.js` around line 755 in the `StoreHoursManager` constructor:
+
+```javascript
+this.storeData = {
+  "businessName": "Luxe Hair Studio",
+  "timezone": "America/New_York",
   "hours": {
-    "monday": { "isOpen": true, "openTime": "09:00", "closeTime": "18:00" },
-    "tuesday": { "isOpen": true, "openTime": "09:00", "closeTime": "18:00" },
-    "wednesday": { "isOpen": false },
+    "monday": { "isOpen": false, "openTime": null, "closeTime": null },
+    "tuesday": { "isOpen": true, "openTime": "09:00", "closeTime": "18:30" },
+    "wednesday": { "isOpen": true, "openTime": "09:00", "closeTime": "19:00" },
     "thursday": { "isOpen": true, "openTime": "09:00", "closeTime": "19:00" },
     "friday": { "isOpen": true, "openTime": "09:00", "closeTime": "19:00" },
-    "saturday": { "isOpen": true, "openTime": "10:00", "closeTime": "16:00" },
-    "sunday": { "isOpen": false }
+    "saturday": { "isOpen": true, "openTime": "08:00", "closeTime": "19:25" },
+    "sunday": { "isOpen": false, "openTime": null, "closeTime": null }
   },
-  "specialDates": {
+  "specialHours": {
     "holidays": [
-      { "date": "2025-12-25", "reason": "Christmas Day" }
+      { "date": "2025-12-25", "name": "Christmas Day", "isOpen": false },
+      { "date": "2025-01-01", "name": "New Year's Day", "isOpen": false }
     ],
-    "vacationPeriods": [
-      {
-        "startDate": "2025-07-15",
-        "endDate": "2025-07-29",
-        "reason": "Summer Vacation"
-      }
+    "vacation": [
+      { "startDate": "2025-08-15", "endDate": "2025-08-22", "reason": "Summer Vacation" }
     ]
   },
   "closingSoonWarning": 60,
@@ -38,10 +39,14 @@ The store hours system automatically displays your current business status (Open
     "open": "We're Open!",
     "closed": "We're Closed",
     "closingSoon": "Closing Soon",
-    "openingSoon": "Opening Soon"
+    "openingSoon": "Opening Soon",
+    "holiday": "Closed for Holiday",
+    "vacation": "Closed for Vacation"
   }
-}
+};
 ```
+
+**Important:** This data is now embedded directly in the JavaScript file instead of a separate JSON file. This ensures compatibility with static hosting platforms like GitHub Pages, Netlify, and Vercel.
 
 ## Configuration Options Explained
 
