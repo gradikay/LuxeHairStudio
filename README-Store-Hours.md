@@ -37,16 +37,16 @@ All of this updates automatically from data built into your website - no externa
 
 **For days you're OPEN:**
 ```json
-"monday": {
+"tuesday": {
   "isOpen": true,
   "openTime": "09:00",
-  "closeTime": "18:00"
+  "closeTime": "18:30"
 }
 ```
 
 **For days you're CLOSED:**
 ```json
-"sunday": {
+"monday": {
   "isOpen": false,
   "openTime": null,
   "closeTime": null
@@ -119,10 +119,10 @@ For week-long vacations:
 
 **Typical Hair Salon Hours:**
 ```json
-"tuesday": { "isOpen": true, "openTime": "09:00", "closeTime": "18:00" }
+"tuesday": { "isOpen": true, "openTime": "09:00", "closeTime": "18:30" }
 "wednesday": { "isOpen": true, "openTime": "09:00", "closeTime": "19:00" }
-"saturday": { "isOpen": true, "openTime": "08:00", "closeTime": "17:00" }
-"sunday": { "isOpen": false, "openTime": null, "closeTime": null }
+"saturday": { "isOpen": true, "openTime": "08:00", "closeTime": "19:25" }
+"monday": { "isOpen": false, "openTime": null, "closeTime": null }
 ```
 
 **Adding Independence Day:**

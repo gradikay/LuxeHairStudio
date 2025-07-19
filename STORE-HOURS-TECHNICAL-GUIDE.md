@@ -56,17 +56,19 @@ Each day of the week has these properties:
 
 **For Open Days:**
 ```json
-"monday": {
+"tuesday": {
   "isOpen": true,
   "openTime": "09:00",
-  "closeTime": "18:00"
+  "closeTime": "18:30"
 }
 ```
 
 **For Closed Days:**
 ```json
-"sunday": {
-  "isOpen": false
+"monday": {
+  "isOpen": false,
+  "openTime": null,
+  "closeTime": null
 }
 ```
 

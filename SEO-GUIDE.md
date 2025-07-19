@@ -102,8 +102,8 @@ Update with your real business information:
     "addressCountry": "US"
   },
   "openingHours": [
-    "Mo-Fr 09:00-18:00",
-    "Sa 09:00-17:00"
+    "Tu-Fr 09:00-19:00",
+    "Sa 08:00-19:25"
   ],
   "priceRange": "$$",
   "image": "https://your-domain.com/images/salon-photo.jpg"
