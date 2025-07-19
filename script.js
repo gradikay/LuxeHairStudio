@@ -458,6 +458,137 @@ document.head.appendChild(modalStyles);
 const PORT = 5000;
 const HOST = '0.0.0.0';
 
+// Gallery Carousel Functionality
+class GalleryCarousel {
+    constructor() {
+        this.track = document.querySelector('.gallery-track');
+        this.items = document.querySelectorAll('.gallery-item');
+        this.prevBtn = document.querySelector('.carousel-btn-prev');
+        this.nextBtn = document.querySelector('.carousel-btn-next');
+        this.dots = document.querySelectorAll('.dot');
+        
+        this.currentSlide = 0;
+        this.itemsPerSlide = this.getItemsPerSlide();
+        this.totalSlides = Math.ceil(this.items.length / this.itemsPerSlide);
+        
+        this.init();
+    }
+    
+    getItemsPerSlide() {
+        if (window.innerWidth <= 480) return 1;
+        if (window.innerWidth <= 768) return 2;
+        return 3;
+    }
+    
+    init() {
+        this.updateCarousel();
+        this.bindEvents();
+        
+        // Auto-play carousel
+        this.startAutoPlay();
+    }
+    
+    bindEvents() {
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => this.prevSlide());
+        }
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.nextSlide());
+        }
+        
+        this.dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => this.goToSlide(index));
+        });
+        
+        // Touch/swipe support
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+        
+        this.track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            this.stopAutoPlay();
+        });
+        
+        this.track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+        });
+        
+        this.track.addEventListener('touchend', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const diff = startX - currentX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    this.nextSlide();
+                } else {
+                    this.prevSlide();
+                }
+            }
+            this.startAutoPlay();
+        });
+        
+        // Resize handler
+        window.addEventListener('resize', () => {
+            this.itemsPerSlide = this.getItemsPerSlide();
+            this.totalSlides = Math.ceil(this.items.length / this.itemsPerSlide);
+            this.updateCarousel();
+        });
+        
+        // Pause on hover
+        this.track.addEventListener('mouseenter', () => this.stopAutoPlay());
+        this.track.addEventListener('mouseleave', () => this.startAutoPlay());
+    }
+    
+    updateCarousel() {
+        const translateX = -this.currentSlide * (100 / this.totalSlides);
+        this.track.style.transform = `translateX(${translateX}%)`;
+        
+        // Update dots
+        this.dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === this.currentSlide);
+        });
+    }
+    
+    nextSlide() {
+        this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+        this.updateCarousel();
+    }
+    
+    prevSlide() {
+        this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+        this.updateCarousel();
+    }
+    
+    goToSlide(index) {
+        this.currentSlide = index;
+        this.updateCarousel();
+    }
+    
+    startAutoPlay() {
+        this.stopAutoPlay();
+        this.autoPlayInterval = setInterval(() => {
+            this.nextSlide();
+        }, 5000); // Change slide every 5 seconds
+    }
+    
+    stopAutoPlay() {
+        if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+        }
+    }
+}
+
+// Initialize carousel when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.gallery-track')) {
+        const carousel = new GalleryCarousel();
+    }
+});
+
 // This would typically be handled by a web server
 console.log(`Hair salon website ready to serve on http://${HOST}:${PORT}`);
 

@@ -108,6 +108,8 @@ Buttons should be very girly with sparkle effects, gradients, and handwritten fo
 - Professional SVG icons throughout the site
 - Comprehensive documentation system with technical guide and user-friendly README
 - Compact, elegant store status section design
+- Smooth carousel gallery with rotation angles, auto-play, and touch/swipe support
+- Enhanced floating animations with improved smoothness and visual appeal
 
 ## Technical Notes
 

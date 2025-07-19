@@ -385,37 +385,68 @@ body {
     border: 1px solid rgba(255, 105, 180, 0.3);
 }
 
-/* Gallery Section */
+/* Gallery Section - Carousel */
 .gallery {
     padding: 100px 0;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a0a 100%);
 }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+.gallery-carousel-container {
+    position: relative;
     margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.gallery-carousel {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
+}
+
+.gallery-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: gentleFloat 4s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
 }
 
 .gallery-item {
     position: relative;
+    flex: 0 0 calc(33.333% - 1rem);
+    margin: 0 0.5rem;
     border-radius: 15px;
     overflow: hidden;
     aspect-ratio: 1;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: rotate(-2deg);
+}
+
+.gallery-item:nth-child(even) {
+    transform: rotate(2deg);
 }
 
 .gallery-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4);
+    transform: rotate(0deg) scale(1.05) translateY(-10px);
+    box-shadow: 0 25px 50px rgba(255, 105, 180, 0.6);
+    z-index: 10;
 }
 
 .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
 }
 
 .gallery-overlay {
@@ -427,7 +458,7 @@ body {
     color: #fff;
     padding: 2rem 1rem 1rem;
     transform: translateY(100%);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 .gallery-item:hover .gallery-overlay {
@@ -439,6 +470,109 @@ body {
     font-size: 1.5rem;
     color: #ff69b4;
     font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Carousel Controls */
+.carousel-btn {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+    z-index: 20;
+    position: relative;
+}
+
+.carousel-btn:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 12px 30px rgba(255, 105, 180, 0.6);
+    background: linear-gradient(135deg, #ff1493, #ff69b4);
+}
+
+.carousel-btn:active {
+    transform: scale(0.95);
+}
+
+.carousel-btn svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* Carousel Dots */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 105, 180, 0.5);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: #ff69b4;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+    transform: scale(1.2);
+}
+
+.dot:hover {
+    border-color: #ff69b4;
+    transform: scale(1.1);
+}
+
+/* Mobile Responsive Carousel */
+@media (max-width: 768px) {
+    .gallery-carousel-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .carousel-btn {
+        display: none;
+    }
+    
+    .gallery-item {
+        flex: 0 0 calc(50% - 1rem);
+    }
+    
+    .gallery-track {
+        animation: gentleFloat 3s ease-in-out infinite;
+    }
+    
+    @keyframes gentleFloat {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-5px); }
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-item {
+        flex: 0 0 calc(80% - 1rem);
+        margin: 0 0.25rem;
+    }
+    
+    .gallery-carousel-container {
+        gap: 1rem;
+    }
+    
+    .carousel-dots {
+        margin-top: 1.5rem;
+    }
 }
 
 /* Salon Interior Section */
