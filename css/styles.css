@@ -1109,15 +1109,32 @@ input, textarea {
     -webkit-user-modify: read-only !important;
 }
 
-/* Force remove any auto-generated links */
-.info-details a,
-.contact-info a,
-.contact a {
+/* Style contact links to look like normal text but remain functional */
+.contact-link {
     color: #e0e0e0 !important;
     text-decoration: none !important;
-    pointer-events: none !important;
     border: none !important;
     background: transparent !important;
+    cursor: pointer !important;
+    transition: color 0.3s ease;
+}
+
+.contact-link:hover,
+.contact-link:focus {
+    color: #ff69b4 !important;
+    text-decoration: none !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.contact-link:visited {
+    color: #e0e0e0 !important;
+    text-decoration: none !important;
+}
+
+.contact-link:active {
+    color: #ff69b4 !important;
+    text-decoration: none !important;
 }
 
 /* Contact Form */

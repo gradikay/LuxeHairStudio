@@ -128,7 +128,7 @@ Buttons should be very girly with sparkle effects, gradients, and handwritten fo
 - Fixed gallery touch events to prevent modal opening during scroll gestures
 - Converted all 11 images from PNG to WebP format for 93% file size reduction (42MB → 3MB)
 - Enhanced iOS Safari form styling with aggressive CSS overrides for select dropdown and date inputs
-- Removed default browser styling for phone numbers and emails to prevent unwanted blue link appearance
+- Created custom contact links with white styling that remain functional for phone calls and emails
 
 ## Technical Notes
 
