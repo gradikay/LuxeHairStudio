@@ -6,18 +6,28 @@
 (function() {
     'use strict';
 
-    // Disable right-click context menu
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-    });
+    // Mobile detection function
+    function isMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+               window.innerWidth <= 768;
+    }
 
-    // Disable text selection
-    document.addEventListener('selectstart', function(e) {
-        e.preventDefault();
-        return false;
-    });
+    // Disable right-click context menu (only on desktop)
+    if (!isMobile()) {
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        });
+    }
+
+    // Disable text selection (only on desktop)
+    if (!isMobile()) {
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+    }
 
     // Disable drag and drop
     document.addEventListener('dragstart', function(e) {
@@ -105,28 +115,29 @@
         }
     });
 
-    // Detect developer tools
-    let devtools = {
-        open: false,
-        orientation: null
-    };
+    // Detect developer tools (only on desktop)
 
-    const threshold = 160;
+    if (!isMobile()) {
+        let devtools = {
+            open: false,
+            orientation: null
+        };
 
-    setInterval(function() {
-        if (window.outerHeight - window.innerHeight > threshold || 
-            window.outerWidth - window.innerWidth > threshold) {
-            if (!devtools.open) {
-                devtools.open = true;
-                // Redirect or show warning when dev tools detected
-                document.body.style.display = 'none';
-                alert('Developer tools detected. Page access restricted.');
-                window.location.href = 'about:blank';
+        const threshold = 160;
+
+        setInterval(function() {
+            if (window.outerHeight - window.innerHeight > threshold || 
+                window.outerWidth - window.innerWidth > threshold) {
+                if (!devtools.open) {
+                    devtools.open = true;
+                    // Show warning when dev tools detected (no redirect on mobile)
+                    console.warn('Developer tools detected.');
+                }
+            } else {
+                devtools.open = false;
             }
-        } else {
-            devtools.open = false;
-        }
-    }, 500);
+        }, 500);
+    }
 
     // Console warning message
     console.clear();
@@ -171,19 +182,21 @@
         window.top.location = window.self.location;
     }
 
-    // Blur content when window loses focus (inspect element detection)
-    let blurTimer;
-    window.addEventListener('blur', function() {
-        clearTimeout(blurTimer);
-        blurTimer = setTimeout(function() {
-            document.body.style.filter = 'blur(5px)';
-        }, 100);
-    });
+    // Blur content when window loses focus (only on desktop)
+    if (!isMobile()) {
+        let blurTimer;
+        window.addEventListener('blur', function() {
+            clearTimeout(blurTimer);
+            blurTimer = setTimeout(function() {
+                document.body.style.filter = 'blur(3px)';
+            }, 200);
+        });
 
-    window.addEventListener('focus', function() {
-        clearTimeout(blurTimer);
-        document.body.style.filter = 'none';
-    });
+        window.addEventListener('focus', function() {
+            clearTimeout(blurTimer);
+            document.body.style.filter = 'none';
+        });
+    }
 
     // Disable Ctrl+Shift+K (Firefox console)
     document.addEventListener('keydown', function(e) {
