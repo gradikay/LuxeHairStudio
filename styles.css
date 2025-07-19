@@ -549,6 +549,11 @@ body {
     font-weight: 600;
     transition: all 0.3s ease;
     animation: glow 3s ease-in-out infinite alternate;
+    background: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 @keyframes glow {
@@ -571,23 +576,33 @@ body {
 /* Status-specific colors */
 .status-open {
     color: #4CAF50 !important;
+    background: none !important;
+    background-color: transparent !important;
 }
 
 .status-closed {
     color: #f44336 !important;
+    background: none !important;
+    background-color: transparent !important;
 }
 
 .status-closing-soon {
     color: #FF9800 !important;
     animation: pulse 2s infinite;
+    background: none !important;
+    background-color: transparent !important;
 }
 
 .status-opening-soon {
     color: #2196F3 !important;
+    background: none !important;
+    background-color: transparent !important;
 }
 
 .status-holiday, .status-vacation {
     color: #9C27B0 !important;
+    background: none !important;
+    background-color: transparent !important;
 }
 
 @keyframes pulse {
