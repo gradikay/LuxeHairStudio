@@ -99,7 +99,7 @@ Buttons should be very girly with sparkle effects, gradients, and handwritten fo
 - Limited SEO optimization
 
 ### Recent Enhancements (July 2025)
-- Live store hours status system with embedded JavaScript data (static hosting compatible)
+- Live store hours status system with embedded JavaScript data (static hosting compatible, no external JSON files needed)
 - Real-time open/closed status display with color-coded indicators
 - Support for holidays, vacation periods, and closing soon warnings
 - Countdown timer with shaking bell icon animation when closing soon
