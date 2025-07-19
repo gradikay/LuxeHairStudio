@@ -571,6 +571,9 @@ class StoreHoursManager {
         this.timerHours = document.getElementById('timer-hours');
         this.timerMinutes = document.getElementById('timer-minutes');
         this.timerSeconds = document.getElementById('timer-seconds');
+        this.statusIcon = document.getElementById('status-icon');
+        this.bellIcon = this.statusIcon.querySelector('.bell-icon');
+        this.clockIcon = this.statusIcon.querySelector('.clock-icon');
         this.countdownInterval = null;
         this.init();
     }
@@ -705,6 +708,15 @@ class StoreHoursManager {
         this.statusElement.textContent = statusText;
         this.hoursElement.textContent = hoursText;
         this.nextChangeElement.textContent = nextChangeText;
+        
+        // Switch icons based on status
+        if (statusClass === 'closing-soon') {
+            this.bellIcon.style.display = 'block';
+            this.clockIcon.style.display = 'none';
+        } else {
+            this.bellIcon.style.display = 'none';
+            this.clockIcon.style.display = 'block';
+        }
     }
 
     updateTodayHours(todayHours) {

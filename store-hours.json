@@ -30,7 +30,7 @@
     "saturday": {
       "isOpen": true,
       "openTime": "08:00",
-      "closeTime": "18:00"
+      "closeTime": "19:30"
     },
     "sunday": {
       "isOpen": false,
