@@ -10,7 +10,7 @@
     "tuesday": {
       "isOpen": true,
       "openTime": "09:00",
-      "closeTime": "19:00"
+      "closeTime": "18:30"
     },
     "wednesday": {
       "isOpen": true,
@@ -59,7 +59,7 @@
       }
     ]
   },
-  "closingSoonWarning": 60,
+  "closingSoonWarning": 120,
   "messages": {
     "open": "We're Open!",
     "closed": "We're Closed",

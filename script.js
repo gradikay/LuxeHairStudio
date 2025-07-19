@@ -567,6 +567,11 @@ class StoreHoursManager {
         this.statusElement = document.getElementById('store-status-text');
         this.hoursElement = document.getElementById('store-hours-today');
         this.nextChangeElement = document.getElementById('next-status-change');
+        this.countdownElement = document.getElementById('countdown-timer');
+        this.timerHours = document.getElementById('timer-hours');
+        this.timerMinutes = document.getElementById('timer-minutes');
+        this.timerSeconds = document.getElementById('timer-seconds');
+        this.countdownInterval = null;
         this.init();
     }
 
@@ -576,6 +581,8 @@ class StoreHoursManager {
             this.updateStatus();
             // Update every minute
             setInterval(() => this.updateStatus(), 60000);
+            // Update countdown every second
+            setInterval(() => this.updateCountdown(), 1000);
         } catch (error) {
             console.error('Failed to load store hours:', error);
             this.showError();
@@ -730,8 +737,45 @@ class StoreHoursManager {
         return 'Check back for updates';
     }
 
+    updateCountdown() {
+        if (!this.storeData) return;
+
+        const currentDay = this.getCurrentDay();
+        const dayHours = this.storeData.hours[currentDay];
+
+        // Only show countdown if store is open and closing soon
+        if (!dayHours || !dayHours.isOpen) {
+            this.countdownElement.style.display = 'none';
+            return;
+        }
+
+        const currentMinutes = this.timeStringToMinutes(this.getCurrentTime().timeString);
+        const closeMinutes = this.timeStringToMinutes(dayHours.closeTime);
+        const minutesUntilClose = closeMinutes - currentMinutes;
+        const warningMinutes = this.storeData.closingSoonWarning || 60;
+
+        if (minutesUntilClose > 0 && minutesUntilClose <= warningMinutes) {
+            // Show countdown
+            this.countdownElement.style.display = 'block';
+            
+            const now = new Date();
+            const totalSecondsUntilClose = (minutesUntilClose * 60) - now.getSeconds();
+            
+            const hours = Math.floor(totalSecondsUntilClose / 3600);
+            const minutes = Math.floor((totalSecondsUntilClose % 3600) / 60);
+            const seconds = totalSecondsUntilClose % 60;
+
+            this.timerHours.textContent = hours.toString().padStart(2, '0');
+            this.timerMinutes.textContent = minutes.toString().padStart(2, '0');
+            this.timerSeconds.textContent = Math.max(0, seconds).toString().padStart(2, '0');
+        } else {
+            this.countdownElement.style.display = 'none';
+        }
+    }
+
     showError() {
         this.setStatus('closed', 'Unable to load hours', 'Please call for current hours', '');
+        this.countdownElement.style.display = 'none';
     }
 }
 

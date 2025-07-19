@@ -44,6 +44,32 @@
         </div>
     </section>
 
+    <!-- Store Hours Status Section -->
+    <section class="store-status">
+        <div class="container">
+            <div class="status-widget">
+                <div class="status-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/>
+                    </svg>
+                </div>
+                <div class="status-content">
+                    <h3 id="store-status-text">Loading...</h3>
+                    <p id="store-hours-today">Checking hours...</p>
+                    <p id="next-status-change"></p>
+                    <div id="countdown-timer" class="countdown-timer" style="display: none;">
+                        <div class="timer-display">
+                            <span id="timer-hours">00</span>:
+                            <span id="timer-minutes">00</span>:
+                            <span id="timer-seconds">00</span>
+                        </div>
+                        <p class="timer-label">Until we close</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
@@ -231,24 +257,6 @@
                 </div>
                 <div class="interior-item">
                     <img src="https://pixabay.com/get/gf1b9d31478455dde70909364899d2bf186de3e235447bfcb8ea83d238b18186c436c3bfe786b02192e8eda2b274b19aa3479de94a532aa3209e3475beae60b3d_1280.jpg" alt="Salon interior 2">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Store Hours Status Section -->
-    <section class="store-status">
-        <div class="container">
-            <div class="status-widget">
-                <div class="status-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/>
-                    </svg>
-                </div>
-                <div class="status-content">
-                    <h3 id="store-status-text">Loading...</h3>
-                    <p id="store-hours-today">Checking hours...</p>
-                    <p id="next-status-change"></p>
                 </div>
             </div>
         </div>

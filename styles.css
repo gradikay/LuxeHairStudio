@@ -564,6 +564,43 @@ body {
     100% { opacity: 1; }
 }
 
+/* Countdown Timer Styles */
+.countdown-timer {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 105, 180, 0.1);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 105, 180, 0.3);
+    text-align: center;
+}
+
+.timer-display {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #ff69b4;
+    text-shadow: 0 2px 4px rgba(255, 105, 180, 0.3);
+    margin-bottom: 0.5rem;
+    animation: pulse 2s infinite;
+}
+
+.timer-label {
+    font-size: 0.9rem;
+    color: #ffb6c1;
+    margin: 0;
+    font-style: italic;
+}
+
+.timer-display span {
+    display: inline-block;
+    min-width: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.2rem 0.4rem;
+    margin: 0 0.1rem;
+    backdrop-filter: blur(5px);
+}
+
 /* Contact Section */
 .contact {
     padding: 100px 0;
