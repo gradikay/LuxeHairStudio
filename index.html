@@ -39,8 +39,27 @@
             <p class="hero-description">Experience luxury hair care with a personal touch. Creating stunning hairstyles that make you feel confident and beautiful.</p>
             <button class="cta-button" onclick="scrollToSection('contact')">Book Your Appointment</button>
         </div>
-        <div class="hero-image">
-            <img src="https://pixabay.com/get/gd2bc4e44f96778e9815d93e73554a41a3416b7bcf6b20b2cd783699a7c362e942448e6effae1051171d57f39a9d68d454d4ad13bd2a262f70e386c564562320b_1280.jpg" alt="Beautiful African American woman with styled hair">
+        <div class="hero-carousel-container">
+            <div class="hero-carousel">
+                <div class="hero-slide active">
+                    <img src="https://pixabay.com/get/gd2bc4e44f96778e9815d93e73554a41a3416b7bcf6b20b2cd783699a7c362e942448e6effae1051171d57f39a9d68d454d4ad13bd2a262f70e386c564562320b_1280.jpg" alt="Beautiful African American woman with styled hair">
+                </div>
+                <div class="hero-slide">
+                    <img src="https://pixabay.com/get/gc731fa7ee4bbfa9dcffd35976cf7eb72f7a0da0c21b9556722a6652c55bd9ba1e210c0baf04a6856936bb8d8203e9992e53edaefa976469097fb124280475ea7_1280.jpg" alt="Gorgeous voluminous hairstyle">
+                </div>
+                <div class="hero-slide">
+                    <img src="https://pixabay.com/get/g91c235b8b90cd2562a61a9b63e1febb0428258902bf78c54292059b623e74dcaa5a16050f739809e39309597f935b059343ea865e658f6dcda99401399a45822_1280.jpg" alt="Elegant styled hair">
+                </div>
+                <div class="hero-slide">
+                    <img src="https://pixabay.com/get/g49a2f075afe825589f98a9eb603ba1ae628eefde8ba43729fffef9cbd00e4d91b87436dc5b5f4704e7feadaeb4ba18ade03f76847622a6b1008ecf867dbb91f9_1280.jpg" alt="Professional updo style">
+                </div>
+            </div>
+            <div class="hero-carousel-dots">
+                <button class="hero-dot active" data-slide="0"></button>
+                <button class="hero-dot" data-slide="1"></button>
+                <button class="hero-dot" data-slide="2"></button>
+                <button class="hero-dot" data-slide="3"></button>
+            </div>
         </div>
     </section>
 
@@ -209,70 +228,48 @@
             <h2 class="section-title">Hair Gallery</h2>
             <p class="section-subtitle">See our stunning transformations</p>
             
-            <div class="gallery-carousel-container">
-                <button class="carousel-btn carousel-btn-prev" aria-label="Previous images">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
-                    </svg>
-                </button>
-                
-                <div class="gallery-carousel">
-                    <div class="gallery-track">
-                        <div class="gallery-item">
-                            <img src="https://pixabay.com/get/g49a2f075afe825589f98a9eb603ba1ae628eefde8ba43729fffef9cbd00e4d91b87436dc5b5f4704e7feadaeb4ba18ade03f76847622a6b1008ecf867dbb91f9_1280.jpg" alt="Beautiful hairstyle 1">
-                            <div class="gallery-overlay">
-                                <h4>Elegant Updo</h4>
-                            </div>
-                        </div>
-                        
-                        <div class="gallery-item">
-                            <img src="https://pixabay.com/get/g91c235b8b90cd2562a61a9b63e1febb0428258902bf78c54292059b623e74dcaa5a16050f739809e39309597f935b059343ea865e658f6dcda99401399a45822_1280.jpg" alt="Beautiful hairstyle 2">
-                            <div class="gallery-overlay">
-                                <h4>Glamorous Waves</h4>
-                            </div>
-                        </div>
-                        
-                        <div class="gallery-item">
-                            <img src="https://pixabay.com/get/gc201b3878388e1bcdb1fea7fae09ba05d2326599355e4a99278ffbe772da18e65ecfe50eee9bda52cc4a9e43af210c00682e05243daef5ccd4095eebbea5507c_1280.jpg" alt="Beautiful hairstyle 3">
-                            <div class="gallery-overlay">
-                                <h4>Natural Curls</h4>
-                            </div>
-                        </div>
-                        
-                        <div class="gallery-item">
-                            <img src="https://pixabay.com/get/gc2622793d0d3364e78704c0c31b1aab2e6f01424b87e16954a3102eb84610b15724c54b29f8e147813f12bff169a1a2299c631edc7b9518b4d3507cdf71f0ec3_1280.jpg" alt="Beautiful hairstyle 4">
-                            <div class="gallery-overlay">
-                                <h4>Sleek & Straight</h4>
-                            </div>
-                        </div>
-                        
-                        <div class="gallery-item">
-                            <img src="https://pixabay.com/get/gc731fa7ee4bbfa9dcffd35976cf7eb72f7a0da0c21b9556722a6652c55bd9ba1e210c0baf04a6856936bb8d8203e9992e53edaefa976469097fb124280475ea7_1280.jpg" alt="Beautiful hairstyle 5">
-                            <div class="gallery-overlay">
-                                <h4>Voluminous Style</h4>
-                            </div>
-                        </div>
-                        
-                        <div class="gallery-item">
-                            <img src="https://pixabay.com/get/g4640c2f91955d3fb01a07cd6b356af082cb4141f0ada628a0c8c9050f576012a8e3928908c13e9896c67934d572a25b5e1d4b89844280d9cf46dec156f33f7eb_1280.jpg" alt="Beautiful hairstyle 6">
-                            <div class="gallery-overlay">
-                                <h4>Textured Layers</h4>
-                            </div>
-                        </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/g49a2f075afe825589f98a9eb603ba1ae628eefde8ba43729fffef9cbd00e4d91b87436dc5b5f4704e7feadaeb4ba18ade03f76847622a6b1008ecf867dbb91f9_1280.jpg" alt="Beautiful hairstyle 1">
+                    <div class="gallery-overlay">
+                        <h4>Elegant Updo</h4>
                     </div>
                 </div>
                 
-                <button class="carousel-btn carousel-btn-next" aria-label="Next images">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <div class="carousel-dots">
-                <button class="dot active" data-slide="0"></button>
-                <button class="dot" data-slide="1"></button>
-                <button class="dot" data-slide="2"></button>
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/g91c235b8b90cd2562a61a9b63e1febb0428258902bf78c54292059b623e74dcaa5a16050f739809e39309597f935b059343ea865e658f6dcda99401399a45822_1280.jpg" alt="Beautiful hairstyle 2">
+                    <div class="gallery-overlay">
+                        <h4>Glamorous Waves</h4>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/gc201b3878388e1bcdb1fea7fae09ba05d2326599355e4a99278ffbe772da18e65ecfe50eee9bda52cc4a9e43af210c00682e05243daef5ccd4095eebbea5507c_1280.jpg" alt="Beautiful hairstyle 3">
+                    <div class="gallery-overlay">
+                        <h4>Natural Curls</h4>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/gc2622793d0d3364e78704c0c31b1aab2e6f01424b87e16954a3102eb84610b15724c54b29f8e147813f12bff169a1a2299c631edc7b9518b4d3507cdf71f0ec3_1280.jpg" alt="Beautiful hairstyle 4">
+                    <div class="gallery-overlay">
+                        <h4>Sleek & Straight</h4>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/gc731fa7ee4bbfa9dcffd35976cf7eb72f7a0da0c21b9556722a6652c55bd9ba1e210c0baf04a6856936bb8d8203e9992e53edaefa976469097fb124280475ea7_1280.jpg" alt="Beautiful hairstyle 5">
+                    <div class="gallery-overlay">
+                        <h4>Voluminous Style</h4>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/g4640c2f91955d3fb01a07cd6b356af082cb4141f0ada628a0c8c9050f576012a8e3928908c13e9896c67934d572a25b5e1d4b89844280d9cf46dec156f33f7eb_1280.jpg" alt="Beautiful hairstyle 6">
+                    <div class="gallery-overlay">
+                        <h4>Textured Layers</h4>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

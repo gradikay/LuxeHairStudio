@@ -458,65 +458,46 @@ document.head.appendChild(modalStyles);
 const PORT = 5000;
 const HOST = '0.0.0.0';
 
-// Gallery Carousel Functionality
-class GalleryCarousel {
+// Hero Carousel Functionality
+class HeroCarousel {
     constructor() {
-        this.track = document.querySelector('.gallery-track');
-        this.items = document.querySelectorAll('.gallery-item');
-        this.prevBtn = document.querySelector('.carousel-btn-prev');
-        this.nextBtn = document.querySelector('.carousel-btn-next');
-        this.dots = document.querySelectorAll('.dot');
-        
+        this.slides = document.querySelectorAll('.hero-slide');
+        this.dots = document.querySelectorAll('.hero-dot');
         this.currentSlide = 0;
-        this.itemsPerSlide = this.getItemsPerSlide();
-        this.totalSlides = Math.ceil(this.items.length / this.itemsPerSlide);
+        this.totalSlides = this.slides.length;
         
         this.init();
     }
     
-    getItemsPerSlide() {
-        if (window.innerWidth <= 480) return 1;
-        if (window.innerWidth <= 768) return 2;
-        return 3;
-    }
-    
     init() {
-        this.updateCarousel();
         this.bindEvents();
-        
-        // Auto-play carousel
         this.startAutoPlay();
     }
     
     bindEvents() {
-        if (this.prevBtn) {
-            this.prevBtn.addEventListener('click', () => this.prevSlide());
-        }
-        if (this.nextBtn) {
-            this.nextBtn.addEventListener('click', () => this.nextSlide());
-        }
-        
         this.dots.forEach((dot, index) => {
             dot.addEventListener('click', () => this.goToSlide(index));
         });
         
-        // Touch/swipe support
+        // Touch/swipe support for mobile
         let startX = 0;
         let currentX = 0;
         let isDragging = false;
         
-        this.track.addEventListener('touchstart', (e) => {
+        const carousel = document.querySelector('.hero-carousel');
+        
+        carousel.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
             isDragging = true;
             this.stopAutoPlay();
         });
         
-        this.track.addEventListener('touchmove', (e) => {
+        carousel.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
             currentX = e.touches[0].clientX;
         });
         
-        this.track.addEventListener('touchend', () => {
+        carousel.addEventListener('touchend', () => {
             if (!isDragging) return;
             isDragging = false;
             
@@ -531,21 +512,16 @@ class GalleryCarousel {
             this.startAutoPlay();
         });
         
-        // Resize handler
-        window.addEventListener('resize', () => {
-            this.itemsPerSlide = this.getItemsPerSlide();
-            this.totalSlides = Math.ceil(this.items.length / this.itemsPerSlide);
-            this.updateCarousel();
-        });
-        
         // Pause on hover
-        this.track.addEventListener('mouseenter', () => this.stopAutoPlay());
-        this.track.addEventListener('mouseleave', () => this.startAutoPlay());
+        carousel.addEventListener('mouseenter', () => this.stopAutoPlay());
+        carousel.addEventListener('mouseleave', () => this.startAutoPlay());
     }
     
     updateCarousel() {
-        const translateX = -this.currentSlide * (100 / this.totalSlides);
-        this.track.style.transform = `translateX(${translateX}%)`;
+        // Update slides
+        this.slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === this.currentSlide);
+        });
         
         // Update dots
         this.dots.forEach((dot, index) => {
@@ -572,7 +548,7 @@ class GalleryCarousel {
         this.stopAutoPlay();
         this.autoPlayInterval = setInterval(() => {
             this.nextSlide();
-        }, 5000); // Change slide every 5 seconds
+        }, 4000); // Change slide every 4 seconds
     }
     
     stopAutoPlay() {
@@ -582,10 +558,10 @@ class GalleryCarousel {
     }
 }
 
-// Initialize carousel when DOM is loaded
+// Initialize hero carousel when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('.gallery-track')) {
-        const carousel = new GalleryCarousel();
+    if (document.querySelector('.hero-carousel')) {
+        const heroCarousel = new HeroCarousel();
     }
 });
 
