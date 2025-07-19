@@ -8,6 +8,8 @@ This is a static website for "Luxe Hair Studio," a premium hair salon. The proje
 
 Preferred communication style: Simple, everyday language.
 Use SVG icons instead of emojis for professional appearance.
+Mobile-first design approach - all hover effects must work with touch/finger interactions.
+Buttons should be very girly with sparkle effects, gradients, and handwritten fonts.
 
 ## System Architecture
 

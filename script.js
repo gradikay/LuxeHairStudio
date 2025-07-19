@@ -10,9 +10,16 @@ hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
 });
 
-// Close mobile menu when clicking on nav link
+// Close mobile menu when clicking/touching nav link
 navLinks.forEach(link => {
+    // Mouse click
     link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+    
+    // Touch events for mobile
+    link.addEventListener('touchend', () => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
     });
@@ -283,9 +290,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Hover Effects for Service Cards
+// Mobile-first Effects for Service Cards
 const serviceCards = document.querySelectorAll('.service-card');
 serviceCards.forEach(card => {
+    // Mouse events for desktop
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-15px) scale(1.02)';
     });
@@ -293,15 +301,46 @@ serviceCards.forEach(card => {
     card.addEventListener('mouseleave', () => {
         card.style.transform = 'translateY(0) scale(1)';
     });
+    
+    // Touch events for mobile
+    card.addEventListener('touchstart', () => {
+        card.style.transform = 'translateY(-15px) scale(1.02)';
+    });
+    
+    card.addEventListener('touchend', () => {
+        setTimeout(() => {
+            card.style.transform = 'translateY(0) scale(1)';
+        }, 300);
+    });
 });
 
-// Gallery Item Click to Enlarge (Modal functionality)
+// Gallery Item Click to Enlarge (Modal functionality) - Mobile First
 const galleryItems = document.querySelectorAll('.gallery-item');
 galleryItems.forEach(item => {
+    // Mouse events
     item.addEventListener('click', () => {
         const img = item.querySelector('img');
         const modal = createImageModal(img.src, img.alt);
         document.body.appendChild(modal);
+    });
+    
+    // Touch events for mobile
+    item.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        const img = item.querySelector('img');
+        const modal = createImageModal(img.src, img.alt);
+        document.body.appendChild(modal);
+    });
+    
+    // Touch hover effect
+    item.addEventListener('touchstart', () => {
+        item.style.transform = 'scale(1.05)';
+    });
+    
+    item.addEventListener('touchend', () => {
+        setTimeout(() => {
+            item.style.transform = 'scale(1)';
+        }, 300);
     });
 });
 
@@ -462,24 +501,27 @@ function animateCount(element, target) {
 
 // Back to top button functionality
 const backToTopButton = document.createElement('button');
-backToTopButton.innerHTML = '↑';
+backToTopButton.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"/>
+</svg>`;
 backToTopButton.className = 'back-to-top';
 backToTopButton.style.cssText = `
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ff69b4, #ffb6c1);
-    color: black;
-    border: none;
+    background: linear-gradient(135deg, #ff69b4, #ffb6c1, #ff1493);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     font-size: 1.5rem;
     cursor: pointer;
     display: none;
     z-index: 1000;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
+    overflow: hidden;
 `;
 
 backToTopButton.addEventListener('click', () => {
@@ -499,13 +541,93 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Add hover effect to back to top button
-backToTopButton.addEventListener('mouseenter', () => {
-    backToTopButton.style.transform = 'scale(1.1)';
-    backToTopButton.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.5)';
-});
+// Add touch and hover effects to back to top button
+function addButtonEffect(element) {
+    element.style.transform = 'scale(1.1)';
+    element.style.boxShadow = '0 12px 35px rgba(255, 105, 180, 0.6)';
+}
 
-backToTopButton.addEventListener('mouseleave', () => {
-    backToTopButton.style.transform = 'scale(1)';
-    backToTopButton.style.boxShadow = '0 5px 15px rgba(255, 105, 180, 0.3)';
+function removeButtonEffect(element) {
+    element.style.transform = 'scale(1)';
+    element.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.4)';
+}
+
+// Mouse events
+backToTopButton.addEventListener('mouseenter', () => addButtonEffect(backToTopButton));
+backToTopButton.addEventListener('mouseleave', () => removeButtonEffect(backToTopButton));
+
+// Touch events for mobile
+backToTopButton.addEventListener('touchstart', () => addButtonEffect(backToTopButton));
+backToTopButton.addEventListener('touchend', () => removeButtonEffect(backToTopButton));
+
+// Add mobile-first touch events for all buttons and interactive elements
+document.addEventListener('DOMContentLoaded', () => {
+    // CTA buttons
+    const ctaButtons = document.querySelectorAll('.cta-button, .submit-button');
+    ctaButtons.forEach(button => {
+        // Touch events
+        button.addEventListener('touchstart', (e) => {
+            button.style.transform = 'translateY(-5px) scale(1.02)';
+            button.style.boxShadow = '0 20px 50px rgba(255, 105, 180, 0.6)';
+        });
+        
+        button.addEventListener('touchend', () => {
+            setTimeout(() => {
+                button.style.transform = '';
+                button.style.boxShadow = '';
+            }, 300);
+        });
+    });
+    
+    // Navigation links
+    const navLinksAll = document.querySelectorAll('.nav-link');
+    navLinksAll.forEach(link => {
+        link.addEventListener('touchstart', () => {
+            link.style.color = '#ff69b4';
+            link.style.transform = 'translateY(-2px)';
+        });
+        
+        link.addEventListener('touchend', () => {
+            setTimeout(() => {
+                link.style.color = '';
+                link.style.transform = '';
+            }, 300);
+        });
+    });
+    
+    // Social links
+    const socialLinks = document.querySelectorAll('.social-link');
+    socialLinks.forEach(link => {
+        link.addEventListener('touchstart', () => {
+            link.style.background = 'rgba(255, 105, 180, 0.3)';
+            link.style.transform = 'translateY(-2px)';
+            link.style.color = '#ffb6c1';
+        });
+        
+        link.addEventListener('touchend', () => {
+            setTimeout(() => {
+                link.style.background = '';
+                link.style.transform = '';
+                link.style.color = '';
+            }, 300);
+        });
+    });
+    
+    // Info items in contact section
+    const infoItems = document.querySelectorAll('.info-item');
+    infoItems.forEach(item => {
+        item.addEventListener('touchstart', () => {
+            item.style.background = 'rgba(255, 105, 180, 0.1)';
+            item.style.borderColor = 'rgba(255, 105, 180, 0.4)';
+            item.style.transform = 'translateX(10px)';
+        });
+        
+        item.addEventListener('touchend', () => {
+            setTimeout(() => {
+                item.style.background = '';
+                item.style.borderColor = '';
+                item.style.transform = '';
+            }, 300);
+        });
+    });
 });
