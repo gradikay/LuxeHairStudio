@@ -223,20 +223,20 @@ body {
 }
 
 .hero-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
-    height: 100%;
+    height: auto;
     opacity: 0;
     transform: rotate(-5deg) scale(0.9);
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     animation: gentleHeroFloat 6s ease-in-out infinite;
+    display: none;
 }
 
 .hero-slide.active {
     opacity: 1;
     transform: rotate(-5deg) scale(1);
+    display: block;
 }
 
 .hero-slide img {
