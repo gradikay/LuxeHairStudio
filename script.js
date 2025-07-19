@@ -1,0 +1,511 @@
+// DOM Elements
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+const navLinks = document.querySelectorAll('.nav-link');
+const appointmentForm = document.getElementById('appointmentForm');
+
+// Mobile Navigation Toggle
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on nav link
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+});
+
+// Smooth Scrolling Function
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+// Active Navigation Link Update
+window.addEventListener('scroll', () => {
+    let current = '';
+    const sections = document.querySelectorAll('section[id]');
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= (sectionTop - 200)) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Navbar Background on Scroll
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 100) {
+        navbar.style.background = 'rgba(0, 0, 0, 0.98)';
+        navbar.style.boxShadow = '0 5px 20px rgba(255, 105, 180, 0.2)';
+    } else {
+        navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+        navbar.style.boxShadow = 'none';
+    }
+});
+
+// Scroll Animation Observer
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+// Add fade-in class to elements and observe them
+document.addEventListener('DOMContentLoaded', () => {
+    const animateElements = document.querySelectorAll('.service-card, .gallery-item, .info-item, .interior-item');
+    
+    animateElements.forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
+});
+
+// Form Submission Handler
+appointmentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(appointmentForm);
+    const data = Object.fromEntries(formData);
+    
+    // Basic form validation
+    if (!data.name || !data.email || !data.phone || !data.service || !data.date) {
+        showNotification('Please fill in all required fields.', 'error');
+        return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+        showNotification('Please enter a valid email address.', 'error');
+        return;
+    }
+    
+    // Phone validation (basic)
+    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+    if (!phoneRegex.test(data.phone.replace(/\D/g, ''))) {
+        showNotification('Please enter a valid phone number.', 'error');
+        return;
+    }
+    
+    // Date validation (must be future date)
+    const selectedDate = new Date(data.date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    if (selectedDate < today) {
+        showNotification('Please select a future date for your appointment.', 'error');
+        return;
+    }
+    
+    // Simulate form submission
+    showNotification('Booking request submitted successfully! We\'ll contact you soon to confirm your appointment.', 'success');
+    
+    // Reset form
+    appointmentForm.reset();
+    
+    // In a real application, you would send this data to a server
+    console.log('Appointment Data:', data);
+});
+
+// Notification Function
+function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
+    
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-message">${message}</span>
+            <button class="notification-close">&times;</button>
+        </div>
+    `;
+    
+    // Add notification styles
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: ${type === 'success' ? 'linear-gradient(135deg, #4CAF50, #45a049)' : 
+                     type === 'error' ? 'linear-gradient(135deg, #f44336, #da190b)' : 
+                     'linear-gradient(135deg, #ff69b4, #ffb6c1)'};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        z-index: 10000;
+        animation: slideInRight 0.3s ease;
+        max-width: 400px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    `;
+    
+    // Add notification to page
+    document.body.appendChild(notification);
+    
+    // Add close functionality
+    const closeBtn = notification.querySelector('.notification-close');
+    closeBtn.addEventListener('click', () => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    });
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }
+    }, 5000);
+}
+
+// Add notification animations to CSS
+const notificationStyles = document.createElement('style');
+notificationStyles.textContent = `
+    .notification-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    
+    .notification-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+    }
+    
+    .notification-close:hover {
+        opacity: 1;
+    }
+    
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(notificationStyles);
+
+// Gallery Image Lazy Loading
+const galleryImages = document.querySelectorAll('.gallery-item img, .service-image img, .hero-image img, .about-image img, .interior-item img');
+
+const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            img.style.opacity = '1';
+            imageObserver.unobserve(img);
+        }
+    });
+});
+
+galleryImages.forEach(img => {
+    img.style.opacity = '0';
+    imageObserver.observe(img);
+    
+    // Add load event listener
+    img.addEventListener('load', () => {
+        img.style.opacity = '1';
+    });
+});
+
+// Parallax Effect for Hero Section
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroImage = document.querySelector('.hero-image img');
+    
+    if (heroImage) {
+        const rate = scrolled * -0.5;
+        heroImage.style.transform = `translateY(${rate}px) rotate(-5deg)`;
+    }
+});
+
+// Date Input Minimum Date Setup
+document.addEventListener('DOMContentLoaded', () => {
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+        // Set minimum date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const minDate = tomorrow.toISOString().split('T')[0];
+        dateInput.setAttribute('min', minDate);
+    }
+});
+
+// Hover Effects for Service Cards
+const serviceCards = document.querySelectorAll('.service-card');
+serviceCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-15px) scale(1.02)';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+    });
+});
+
+// Gallery Item Click to Enlarge (Modal functionality)
+const galleryItems = document.querySelectorAll('.gallery-item');
+galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        const modal = createImageModal(img.src, img.alt);
+        document.body.appendChild(modal);
+    });
+});
+
+// Create Image Modal
+function createImageModal(src, alt) {
+    const modal = document.createElement('div');
+    modal.className = 'image-modal';
+    modal.innerHTML = `
+        <div class="modal-backdrop">
+            <div class="modal-content">
+                <img src="${src}" alt="${alt}">
+                <button class="modal-close">&times;</button>
+            </div>
+        </div>
+    `;
+    
+    // Add modal styles
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+    `;
+    
+    // Add event listeners
+    const backdrop = modal.querySelector('.modal-backdrop');
+    const closeBtn = modal.querySelector('.modal-close');
+    
+    backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) {
+            modal.remove();
+        }
+    });
+    
+    closeBtn.addEventListener('click', () => {
+        modal.remove();
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function escapeHandler(e) {
+        if (e.key === 'Escape') {
+            modal.remove();
+            document.removeEventListener('keydown', escapeHandler);
+        }
+    });
+    
+    return modal;
+}
+
+// Add modal styles to document
+const modalStyles = document.createElement('style');
+modalStyles.textContent = `
+    .modal-backdrop {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        cursor: pointer;
+    }
+    
+    .modal-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        cursor: default;
+    }
+    
+    .modal-content img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+    }
+    
+    .modal-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        background: rgba(255, 105, 180, 0.8);
+        border: none;
+        color: white;
+        font-size: 2rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    
+    .modal-close:hover {
+        background: rgba(255, 105, 180, 1);
+        transform: scale(1.1);
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+`;
+document.head.appendChild(modalStyles);
+
+// Simple HTTP server setup for port 5000
+const PORT = 5000;
+const HOST = '0.0.0.0';
+
+// This would typically be handled by a web server
+console.log(`Hair salon website ready to serve on http://${HOST}:${PORT}`);
+
+// Loading screen simulation
+window.addEventListener('load', () => {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.5s ease';
+    
+    setTimeout(() => {
+        document.body.style.opacity = '1';
+    }, 100);
+});
+
+// Intersection Observer for counting animations (if needed for stats)
+const countElements = document.querySelectorAll('[data-count]');
+const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const element = entry.target;
+            const target = parseInt(element.dataset.count);
+            animateCount(element, target);
+            countObserver.unobserve(element);
+        }
+    });
+});
+
+countElements.forEach(el => countObserver.observe(el));
+
+function animateCount(element, target) {
+    let current = 0;
+    const increment = target / 50;
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+        }
+        element.textContent = Math.floor(current);
+    }, 20);
+}
+
+// Back to top button functionality
+const backToTopButton = document.createElement('button');
+backToTopButton.innerHTML = '↑';
+backToTopButton.className = 'back-to-top';
+backToTopButton.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff69b4, #ffb6c1);
+    color: black;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+`;
+
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+document.body.appendChild(backToTopButton);
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTopButton.style.display = 'block';
+    } else {
+        backToTopButton.style.display = 'none';
+    }
+});
+
+// Add hover effect to back to top button
+backToTopButton.addEventListener('mouseenter', () => {
+    backToTopButton.style.transform = 'scale(1.1)';
+    backToTopButton.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.5)';
+});
+
+backToTopButton.addEventListener('mouseleave', () => {
+    backToTopButton.style.transform = 'scale(1)';
+    backToTopButton.style.boxShadow = '0 5px 15px rgba(255, 105, 180, 0.3)';
+});

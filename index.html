@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxe Hair Studio - Premium Hair Salon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Luxe Hair Studio</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to Luxe Hair Studio</h1>
+            <p class="hero-subtitle">Where Beauty Meets Elegance</p>
+            <p class="hero-description">Experience luxury hair care with a personal touch. Creating stunning hairstyles that make you feel confident and beautiful.</p>
+            <button class="cta-button" onclick="scrollToSection('contact')">Book Your Appointment</button>
+        </div>
+        <div class="hero-image">
+            <img src="https://pixabay.com/get/gd2bc4e44f96778e9815d93e73554a41a3416b7bcf6b20b2cd783699a7c362e942448e6effae1051171d57f39a9d68d454d4ad13bd2a262f70e386c564562320b_1280.jpg" alt="Beautiful African American woman with styled hair">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">Meet Your Stylist</h2>
+                    <h3 class="owner-name">Amara Johnson</h3>
+                    <p class="about-description">
+                        Welcome to my world of beauty! I'm Amara, a passionate hair stylist with over 5 years of experience creating stunning looks for beautiful women. My mission is to help you discover your unique style and feel absolutely gorgeous every day.
+                    </p>
+                    <p class="about-description">
+                        I specialize in natural hair care, protective styling, and creating looks that celebrate your natural beauty. Every client is special to me, and I'm committed to providing a luxurious, personalized experience that leaves you feeling pampered and confident.
+                    </p>
+                    <div class="credentials">
+                        <div class="credential-item">
+                            <span class="credential-icon">💎</span>
+                            <span>Licensed Cosmetologist</span>
+                        </div>
+                        <div class="credential-item">
+                            <span class="credential-icon">🎓</span>
+                            <span>Natural Hair Specialist</span>
+                        </div>
+                        <div class="credential-item">
+                            <span class="credential-icon">⭐</span>
+                            <span>5+ Years Experience</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://pixabay.com/get/g64e931499a353893e073ff3015dd1c00e29e2bd39f01fc2fde009657f5b8a93137cce691577859755ac791c19ee0d2f5b78e7c8b2836311070cfa88154442952_1280.jpg" alt="Professional hair styling session">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Luxury hair care services tailored just for you</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://pixabay.com/get/g2436d2128f0aa3f01caa13ac3d1cf6b7c03c6ea94e3481a9f052bf1f6d69384cb138c1f7e07b190736aac716ac55d20cfc3c62170148efed71d872bcf0747778_1280.jpg" alt="Hair cutting service">
+                    </div>
+                    <div class="service-content">
+                        <h3>Precision Cuts</h3>
+                        <p>Expert haircuts tailored to your face shape and lifestyle</p>
+                        <span class="price">Starting at $75</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://pixabay.com/get/g2e90d367a3a88fc8510c930f1effacf2bcbe1872d2b39acf1db430a6e07ba18bd5efc94ede4f2450d5f0ead807c27283f5de0475958ef091556e738070e40979_1280.jpg" alt="Hair styling service">
+                    </div>
+                    <div class="service-content">
+                        <h3>Styling & Blowouts</h3>
+                        <p>Professional styling for any occasion</p>
+                        <span class="price">Starting at $60</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://pixabay.com/get/gb84cc64b9b6e1feb3e6b550d831f6fbaf82b740e61412a3dce4db62db2343d8422ab070eb9deac4ada53232413d277fdb19f0b44fb2fb53344ae15b2cfcf2c05_1280.jpg" alt="Natural hair treatment">
+                    </div>
+                    <div class="service-content">
+                        <h3>Natural Hair Care</h3>
+                        <p>Specialized treatments for natural hair health</p>
+                        <span class="price">Starting at $85</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://pixabay.com/get/gce7354c1837abc1b446a4dc5085e6fc6d97de16d3e1a367ad9ead145d38e4627a664f25cf358aaff8b4efababee5db6114c9307851ec66ace5b813deb8fb6e74_1280.jpg" alt="Protective styling">
+                    </div>
+                    <div class="service-content">
+                        <h3>Protective Styling</h3>
+                        <p>Beautiful braids, twists, and protective styles</p>
+                        <span class="price">Starting at $120</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://pixabay.com/get/g28163ece7f9919b03326a8024d6ce540bbf7698acf89ac857fff496965db762a145e570f4c0079f7acfc0afd12f0200962969b78c43f282cda8cadb0a6e1cce6_1280.jpg" alt="Hair coloring service">
+                    </div>
+                    <div class="service-content">
+                        <h3>Color Services</h3>
+                        <p>Professional hair coloring and highlights</p>
+                        <span class="price">Starting at $150</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://pixabay.com/get/g885a4bd2f06a7e18d8fbce7b3a3a02ad57c19dd7101df4600bcecd8d12fbca66b3b6b79e32dd8e96f2618af79bab14d9c73361b0692c3253173f16701493cc08_1280.jpg" alt="Deep conditioning treatment">
+                    </div>
+                    <div class="service-content">
+                        <h3>Deep Conditioning</h3>
+                        <p>Intensive treatments for healthy, shiny hair</p>
+                        <span class="price">Starting at $45</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Hair Gallery</h2>
+            <p class="section-subtitle">See our stunning transformations</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/g49a2f075afe825589f98a9eb603ba1ae628eefde8ba43729fffef9cbd00e4d91b87436dc5b5f4704e7feadaeb4ba18ade03f76847622a6b1008ecf867dbb91f9_1280.jpg" alt="Beautiful hairstyle 1">
+                    <div class="gallery-overlay">
+                        <h4>Elegant Updo</h4>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/g91c235b8b90cd2562a61a9b63e1febb0428258902bf78c54292059b623e74dcaa5a16050f739809e39309597f935b059343ea865e658f6dcda99401399a45822_1280.jpg" alt="Beautiful hairstyle 2">
+                    <div class="gallery-overlay">
+                        <h4>Glamorous Waves</h4>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/gc201b3878388e1bcdb1fea7fae09ba05d2326599355e4a99278ffbe772da18e65ecfe50eee9bda52cc4a9e43af210c00682e05243daef5ccd4095eebbea5507c_1280.jpg" alt="Beautiful hairstyle 3">
+                    <div class="gallery-overlay">
+                        <h4>Natural Curls</h4>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/gc2622793d0d3364e78704c0c31b1aab2e6f01424b87e16954a3102eb84610b15724c54b29f8e147813f12bff169a1a2299c631edc7b9518b4d3507cdf71f0ec3_1280.jpg" alt="Beautiful hairstyle 4">
+                    <div class="gallery-overlay">
+                        <h4>Sleek & Straight</h4>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/gc731fa7ee4bbfa9dcffd35976cf7eb72f7a0da0c21b9556722a6652c55bd9ba1e210c0baf04a6856936bb8d8203e9992e53edaefa976469097fb124280475ea7_1280.jpg" alt="Beautiful hairstyle 5">
+                    <div class="gallery-overlay">
+                        <h4>Voluminous Style</h4>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://pixabay.com/get/g4640c2f91955d3fb01a07cd6b356af082cb4141f0ada628a0c8c9050f576012a8e3928908c13e9896c67934d572a25b5e1d4b89844280d9cf46dec156f33f7eb_1280.jpg" alt="Beautiful hairstyle 6">
+                    <div class="gallery-overlay">
+                        <h4>Textured Layers</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Salon Interior Section -->
+    <section class="salon-interior">
+        <div class="container">
+            <h2 class="section-title">Our Beautiful Salon</h2>
+            <p class="section-subtitle">Step into luxury and comfort</p>
+            
+            <div class="interior-grid">
+                <div class="interior-item">
+                    <img src="https://pixabay.com/get/g9615f79318553d85e3c3acb0041738db9d3b313e0564ec8209e572511d793e1954c9a2875c5c376cddecf5642278c8ce1f62cee41a74d7e8adbf721d674de257_1280.jpg" alt="Salon interior 1">
+                </div>
+                <div class="interior-item">
+                    <img src="https://pixabay.com/get/gf1b9d31478455dde70909364899d2bf186de3e235447bfcb8ea83d238b18186c436c3bfe786b02192e8eda2b274b19aa3479de94a532aa3209e3475beae60b3d_1280.jpg" alt="Salon interior 2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Book Your Appointment</h2>
+            <p class="section-subtitle">Ready to transform your look? Let's get started!</p>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-details">
+                            <h4>Location</h4>
+                            <p>1234 Beauty Boulevard<br>Downtown Atlanta, GA 30309</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-details">
+                            <h4>Phone</h4>
+                            <p>(404) 555-LUXE<br>(404) 555-5893</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">⏰</div>
+                        <div class="info-details">
+                            <h4>Hours</h4>
+                            <p>Tuesday - Friday: 9am - 7pm<br>Saturday: 8am - 6pm<br>Sunday - Monday: Closed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-details">
+                            <h4>Email</h4>
+                            <p>hello@luxehairstudio.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="appointmentForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="service" name="service" required>
+                                <option value="">Select a Service</option>
+                                <option value="precision-cuts">Precision Cuts</option>
+                                <option value="styling-blowouts">Styling & Blowouts</option>
+                                <option value="natural-hair-care">Natural Hair Care</option>
+                                <option value="protective-styling">Protective Styling</option>
+                                <option value="color-services">Color Services</option>
+                                <option value="deep-conditioning">Deep Conditioning</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Tell me about your hair goals and any special requests..." rows="4"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-button">Book Appointment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Luxe Hair Studio</h3>
+                    <p>Where beauty meets elegance. Creating stunning hairstyles that make you feel confident and beautiful.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">TikTok</a>
+                        <a href="#" class="social-link">Pinterest</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Luxe Hair Studio. All rights reserved. | Website designed with 💖</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
