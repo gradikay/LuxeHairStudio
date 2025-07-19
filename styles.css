@@ -151,12 +151,20 @@ body {
    ======================================== */
 .hero {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 80px 20px 20px;
     background: linear-gradient(135deg, #000000 0%, #2a0a2a 50%, #000000 100%);
     position: relative;
     overflow: hidden;
+    padding: 80px 0 20px;
+}
+
+.hero .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - 100px);
 }
 
 .hero::before {
@@ -176,6 +184,7 @@ body {
     z-index: 2;
     position: relative;
     animation: fadeInLeft 1s ease;
+    margin-right: 2rem;
 }
 
 .hero-title {
@@ -349,14 +358,20 @@ body {
 /* Mobile Responsive Hero Carousel */
 @media (max-width: 768px) {
     .hero {
+        padding: 80px 0 40px;
+    }
+    
+    .hero .container {
         flex-direction: column;
         text-align: center;
-        padding: 80px 20px 40px;
+        padding: 0 20px;
+        min-height: auto;
     }
     
     .hero-content {
         order: 2;
         margin-top: 2rem;
+        margin-right: 0;
     }
     
     .hero-carousel-container {
@@ -1270,14 +1285,19 @@ body {
     }
     
     .hero {
+        padding: 100px 0 50px;
+    }
+    
+    .hero .container {
         flex-direction: column;
         text-align: center;
+        padding: 0 20px;
         min-height: auto;
-        padding: 100px 20px 50px;
     }
     
     .hero-content {
         margin-bottom: 2rem;
+        margin-right: 0;
     }
     
     .hero-title {
