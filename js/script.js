@@ -451,6 +451,24 @@ modalStyles.textContent = `
         cursor: default;
     }
     
+    /* Fixed size for large devices */
+    @media (min-width: 1024px) {
+        .modal-content {
+            max-width: 800px;
+            max-height: 600px;
+            width: auto;
+            height: auto;
+        }
+        
+        .modal-content img {
+            max-width: 800px;
+            max-height: 600px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+    }
+    
     .modal-content img {
         width: 100%;
         height: auto;
@@ -784,9 +802,9 @@ class StoreHoursManager {
                     "closeTime": "19:25"
                 },
                 "sunday": {
-                    "isOpen": false,
-                    "openTime": null,
-                    "closeTime": null
+                    "isOpen": true,
+                    "openTime": "06:00",
+                    "closeTime": "17:00"
                 }
             },
             "specialHours": {
