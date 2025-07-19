@@ -36,6 +36,40 @@ body {
     overflow-x: hidden;
 }
 
+/* Disable automatic phone and email detection styling */
+a[href^="tel:"],
+a[href^="mailto:"] {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+/* Override browser auto-detection of phone numbers and emails */
+p, div, span {
+    -webkit-text-size-adjust: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Re-enable text selection for form inputs */
+input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Specifically target phone and email text to prevent blue styling */
+.info-details p,
+.contact-info p {
+    color: #fff !important;
+    text-decoration: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -1049,8 +1083,41 @@ body {
 }
 
 .info-details p {
-    color: #e0e0e0;
+    color: #e0e0e0 !important;
     line-height: 1.6;
+    text-decoration: none !important;
+    border: none !important;
+    background: none !important;
+    -webkit-text-decoration: none !important;
+    -webkit-text-decoration-color: transparent !important;
+    -webkit-text-decoration-line: none !important;
+    -webkit-text-decoration-style: none !important;
+}
+
+/* Additional phone/email detection override */
+.info-details p,
+.info-details p *,
+.contact-info p,
+.contact-info p *,
+.contact p,
+.contact p * {
+    color: #e0e0e0 !important;
+    text-decoration: none !important;
+    border-bottom: none !important;
+    border: none !important;
+    background: transparent !important;
+    -webkit-user-modify: read-only !important;
+}
+
+/* Force remove any auto-generated links */
+.info-details a,
+.contact-info a,
+.contact a {
+    color: #e0e0e0 !important;
+    text-decoration: none !important;
+    pointer-events: none !important;
+    border: none !important;
+    background: transparent !important;
 }
 
 /* Contact Form */
