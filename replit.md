@@ -130,6 +130,7 @@ Buttons should be very girly with sparkle effects, gradients, and handwritten fo
 - Enhanced iOS Safari form styling with aggressive CSS overrides for select dropdown and date inputs
 - Created custom contact links with white styling that remain functional for phone calls and emails
 - Added comprehensive security script to protect against inspection tools and content copying
+- Fixed store hours countdown timer to use actual closing times instead of hardcoded values
 
 ## Technical Notes
 

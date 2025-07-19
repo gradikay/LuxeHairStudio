@@ -1013,32 +1013,61 @@ class StoreHoursManager {
 
     updateCountdown() {
         const now = new Date();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
-        const seconds = now.getSeconds();
+        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const currentDay = days[now.getDay()];
+        const todayHours = this.storeData.hours[currentDay];
         
-        // Calculate time until 7:15 PM (19:15)
-        const closeTime = new Date();
-        closeTime.setHours(19, 15, 0, 0);
+        // Only show countdown when store is open and closing soon
+        const countdownContainer = document.getElementById('countdown-timer');
+        if (!countdownContainer) return;
         
-        // If it's past closing time, set for next day
-        if (now > closeTime) {
-            closeTime.setDate(closeTime.getDate() + 1);
+        if (!todayHours.isOpen) {
+            countdownContainer.style.display = 'none';
+            return;
         }
-        
-        const timeDiff = closeTime - now;
-        const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
-        const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-        const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
-        
-        // Update timer display
-        const timerHours = document.getElementById('timer-hours');
-        const timerMinutes = document.getElementById('timer-minutes');
-        const timerSeconds = document.getElementById('timer-seconds');
-        
-        if (timerHours) timerHours.textContent = hoursLeft.toString().padStart(2, '0');
-        if (timerMinutes) timerMinutes.textContent = minutesLeft.toString().padStart(2, '0');
-        if (timerSeconds) timerSeconds.textContent = secondsLeft.toString().padStart(2, '0');
+
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        const openMinutes = this.timeStringToMinutes(todayHours.openTime);
+        const closeMinutes = this.timeStringToMinutes(todayHours.closeTime);
+        const closingSoonThreshold = this.storeData.closingSoonWarning;
+
+        // Only show countdown if store is open and closing soon
+        if (currentMinutes >= openMinutes && currentMinutes < closeMinutes) {
+            const minutesUntilClose = closeMinutes - currentMinutes;
+            
+            if (minutesUntilClose <= closingSoonThreshold) {
+                // Store is closing soon - show countdown to today's closing time
+                const closeTime = new Date();
+                const closeHour = Math.floor(closeMinutes / 60);
+                const closeMin = closeMinutes % 60;
+                closeTime.setHours(closeHour, closeMin, 0, 0);
+                
+                const timeDiff = closeTime - now;
+                
+                if (timeDiff > 0) {
+                    const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
+                    const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                    
+                    // Update timer display
+                    const timerHours = document.getElementById('timer-hours');
+                    const timerMinutes = document.getElementById('timer-minutes');
+                    const timerSeconds = document.getElementById('timer-seconds');
+                    
+                    if (timerHours) timerHours.textContent = hoursLeft.toString().padStart(2, '0');
+                    if (timerMinutes) timerMinutes.textContent = minutesLeft.toString().padStart(2, '0');
+                    if (timerSeconds) timerSeconds.textContent = secondsLeft.toString().padStart(2, '0');
+                    
+                    countdownContainer.style.display = 'block';
+                } else {
+                    countdownContainer.style.display = 'none';
+                }
+            } else {
+                countdownContainer.style.display = 'none';
+            }
+        } else {
+            countdownContainer.style.display = 'none';
+        }
     }
 
     showError() {
