@@ -699,6 +699,9 @@ class StoreHoursManager {
         }
 
         this.updateTodayHours(todayHours);
+        
+        // Always update countdown timer after status update
+        this.updateCountdown();
     }
 
     setStatus(statusClass, statusText, hoursText, nextChangeText) {
@@ -765,6 +768,14 @@ class StoreHoursManager {
         const closeMinutes = this.timeStringToMinutes(dayHours.closeTime);
         const minutesUntilClose = closeMinutes - currentMinutes;
         const warningMinutes = this.storeData.closingSoonWarning || 60;
+
+        console.log('Countdown Debug:', {
+            currentMinutes,
+            closeMinutes,
+            minutesUntilClose,
+            warningMinutes,
+            shouldShow: minutesUntilClose > 0 && minutesUntilClose <= warningMinutes
+        });
 
         if (minutesUntilClose > 0 && minutesUntilClose <= warningMinutes) {
             // Show countdown
