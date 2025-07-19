@@ -1,5 +1,5 @@
 # 💕 Store Hours Management Guide 💕
-*Easy setup for your beautiful salon website*
+*Complete guide for managing your salon's store hours*
 
 ## 🌟 What This Does For You
 
@@ -11,7 +11,9 @@ Your website automatically shows customers:
 
 All of this updates automatically from data built into your website - no external files needed!
 
-## 📋 Step-by-Step Instructions
+---
+
+## 📋 Quick Start Instructions
 
 ### 🚨 IMPORTANT: Time Format Rules
 **You MUST use 24-hour time format (no AM/PM)**
@@ -36,7 +38,7 @@ All of this updates automatically from data built into your website - no externa
 ### 📅 Setting Up Each Day
 
 **For days you're OPEN:**
-```json
+```javascript
 "tuesday": {
   "isOpen": true,
   "openTime": "09:00",
@@ -45,7 +47,7 @@ All of this updates automatically from data built into your website - no externa
 ```
 
 **For days you're CLOSED:**
-```json
+```javascript
 "monday": {
   "isOpen": false,
   "openTime": null,
@@ -53,10 +55,13 @@ All of this updates automatically from data built into your website - no externa
 }
 ```
 
-### 🎄 Adding Holidays
+---
 
+## 🎄 Holiday & Vacation Setup
+
+### Adding Holidays
 To close for Christmas, New Year, etc:
-```json
+```javascript
 "holidays": [
   {
     "date": "2025-12-25",
@@ -68,27 +73,72 @@ To close for Christmas, New Year, etc:
 
 **Date format:** YYYY-MM-DD (Year-Month-Day with dashes)
 
-### 🏖️ Setting Vacation Time
-
+### Setting Vacation Time
 For week-long vacations:
-```json
+```javascript
 "vacation": [
   {
     "startDate": "2025-08-15",
-    "endDate": "2025-08-22", 
-    "reason": "Summer Vacation - We'll be back refreshed!"
+    "endDate": "2025-08-22",
+    "reason": "Summer Vacation"
   }
 ]
 ```
 
-### ⏰ Countdown Timer Settings
+---
 
-`"closingSoonWarning": 60` means the countdown timer appears 60 minutes before closing.
+## ⚙️ Complete Technical Configuration
 
-**Popular options:**
+### Full Structure Location
+Located in `js/script.js` around line 755 in the `StoreHoursManager` constructor:
+
+```javascript
+this.storeData = {
+  "businessName": "Luxe Hair Studio",
+  "timezone": "America/New_York",
+  "hours": {
+    "monday": { "isOpen": false, "openTime": null, "closeTime": null },
+    "tuesday": { "isOpen": true, "openTime": "09:00", "closeTime": "18:30" },
+    "wednesday": { "isOpen": true, "openTime": "09:00", "closeTime": "19:00" },
+    "thursday": { "isOpen": true, "openTime": "09:00", "closeTime": "19:00" },
+    "friday": { "isOpen": true, "openTime": "09:00", "closeTime": "19:00" },
+    "saturday": { "isOpen": true, "openTime": "08:00", "closeTime": "19:25" },
+    "sunday": { "isOpen": false, "openTime": null, "closeTime": null }
+  },
+  "specialHours": {
+    "holidays": [
+      { "date": "2025-12-25", "name": "Christmas Day", "isOpen": false },
+      { "date": "2025-01-01", "name": "New Year's Day", "isOpen": false }
+    ],
+    "vacation": [
+      { "startDate": "2025-08-15", "endDate": "2025-08-22", "reason": "Summer Vacation" }
+    ]
+  },
+  "closingSoonWarning": 60,
+  "messages": {
+    "open": "We're Open!",
+    "closed": "We're Closed",
+    "closingSoon": "Closing Soon",
+    "openingSoon": "Opening Soon",
+    "holiday": "Closed for Holiday",
+    "vacation": "Closed for Vacation"
+  }
+};
+```
+
+### Configuration Options Explained
+
+**Daily Hours Properties:**
+- `isOpen`: Boolean - `true` if open, `false` if closed
+- `openTime`: String - Opening time in 24-hour format (HH:MM)
+- `closeTime`: String - Closing time in 24-hour format (HH:MM)
+
+**Countdown Timer (`closingSoonWarning`):**
 - `30` = Shows 30 minutes before closing
 - `60` = Shows 1 hour before closing *(recommended)*
 - `120` = Shows 2 hours before closing
+
+---
 
 ## 🎨 What Your Customers See
 
@@ -97,6 +147,8 @@ For week-long vacations:
 - 🔔 **"Closing Soon"** with a shaking bell and countdown timer
 - 🌅 **"Opening Soon"** when you open within an hour
 - 🎄 **"Closed for Holiday"** on special days
+
+---
 
 ## 🆘 Troubleshooting
 
@@ -113,12 +165,14 @@ For week-long vacations:
 ### "Times look weird on the website"
 - Remember: 13:00 = 1 PM, 18:00 = 6 PM, 20:00 = 8 PM
 - Always use leading zeros: 09:00 (not 9:00)
-- Never use AM/PM in the JSON file
+- Never use AM/PM in the JavaScript file
+
+---
 
 ## 🔧 Quick Examples
 
 **Typical Hair Salon Hours:**
-```json
+```javascript
 "tuesday": { "isOpen": true, "openTime": "09:00", "closeTime": "18:30" }
 "wednesday": { "isOpen": true, "openTime": "09:00", "closeTime": "19:00" }
 "saturday": { "isOpen": true, "openTime": "08:00", "closeTime": "19:25" }
@@ -126,7 +180,7 @@ For week-long vacations:
 ```
 
 **Adding Independence Day:**
-```json
+```javascript
 {
   "date": "2025-07-04",
   "name": "Independence Day",
@@ -134,11 +188,14 @@ For week-long vacations:
 }
 ```
 
-## 💖 Need Help?
+---
 
-- Always save a backup before making changes
-- Test your website after each change
+## 💖 Important Notes
+
+- **Static Hosting Compatible**: All data is embedded in JavaScript, no external files needed
+- **Works on**: GitHub Pages, Netlify, Vercel, and traditional web hosting
+- **Always backup** your files before making changes
+- **Test your website** after each change
 - If something breaks, restore your backup file
-- Keep this guide handy for reference
 
 *Your beautiful salon website will automatically update to show the correct status and countdown timer!*
