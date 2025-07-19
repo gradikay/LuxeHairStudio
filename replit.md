@@ -102,9 +102,12 @@ Buttons should be very girly with sparkle effects, gradients, and handwritten fo
 - Live store hours status system with JSON configuration
 - Real-time open/closed status display with color-coded indicators
 - Support for holidays, vacation periods, and closing soon warnings
+- Countdown timer with shaking bell icon animation when closing soon
 - Mobile-first responsive design with touch event support
 - Ultra-girly button designs with sparkle effects and Dancing Script font
 - Professional SVG icons throughout the site
+- Comprehensive documentation system with technical guide and user-friendly README
+- Compact, elegant store status section design
 
 ## Technical Notes
 
