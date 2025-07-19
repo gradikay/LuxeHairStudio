@@ -245,6 +245,17 @@ body {
     object-fit: cover;
     border-radius: 20px;
     transition: all 0.3s ease;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
 }
 
 .hero-carousel:hover .hero-slide.active {

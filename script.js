@@ -471,7 +471,32 @@ class HeroCarousel {
     
     init() {
         this.bindEvents();
+        this.preventImageZoom();
         this.startAutoPlay();
+    }
+    
+    preventImageZoom() {
+        const carouselImages = document.querySelectorAll('.hero-slide img');
+        
+        carouselImages.forEach(img => {
+            // Prevent context menu and long press actions
+            img.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                return false;
+            });
+            
+            // Prevent drag and drop
+            img.addEventListener('dragstart', (e) => {
+                e.preventDefault();
+                return false;
+            });
+            
+            // Prevent selection
+            img.addEventListener('selectstart', (e) => {
+                e.preventDefault();
+                return false;
+            });
+        });
     }
     
     bindEvents() {
@@ -481,13 +506,16 @@ class HeroCarousel {
         
         // Touch/swipe support for mobile
         let startX = 0;
+        let startY = 0;
         let currentX = 0;
+        let currentY = 0;
         let isDragging = false;
         
         const carousel = document.querySelector('.hero-carousel');
         
         carousel.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
             isDragging = true;
             this.stopAutoPlay();
         });
@@ -495,6 +523,22 @@ class HeroCarousel {
         carousel.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
             currentX = e.touches[0].clientX;
+            currentY = e.touches[0].clientY;
+            
+            // Check if this is a vertical scroll
+            const deltaY = Math.abs(currentY - startY);
+            const deltaX = Math.abs(currentX - startX);
+            
+            // If vertical movement is greater than horizontal, allow scroll
+            if (deltaY > deltaX && deltaY > 10) {
+                isDragging = false;
+                return;
+            }
+            
+            // Prevent horizontal scroll on carousel
+            if (deltaX > 10) {
+                e.preventDefault();
+            }
         });
         
         carousel.addEventListener('touchend', () => {
