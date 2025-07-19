@@ -945,7 +945,7 @@ class StoreHoursManager {
         } else {
             // Store is closed for the day - check next opening
             const nextOpenInfo = this.getNextOpenTimeDetailed();
-            if (nextOpenInfo && nextOpenInfo.minutesUntilOpen <= 4320) { // Show countdown if opening within 3 days (72 hours)
+            if (nextOpenInfo && nextOpenInfo.minutesUntilOpen <= 720) { // Only show "Opening Soon" if within 12 hours
                 this.setStatus('opening-soon', this.storeData.messages.openingSoon, 
                     nextOpenInfo.message, `Opening in ${Math.floor(nextOpenInfo.minutesUntilOpen / 60)}h ${nextOpenInfo.minutesUntilOpen % 60}m`);
             } else {
@@ -1115,7 +1115,7 @@ class StoreHoursManager {
             const statusElement = document.getElementById('store-status-text');
             if (statusElement && statusElement.classList.contains('status-opening-soon')) {
                 const nextOpenInfo = this.getNextOpenTimeDetailed();
-                if (nextOpenInfo && nextOpenInfo.minutesUntilOpen <= 4320) { // Show countdown if opening within 3 days (72 hours)
+                if (nextOpenInfo && nextOpenInfo.minutesUntilOpen <= 720) { // Show countdown if opening within 12 hours
                     const nextOpenDate = new Date(now.getTime() + (nextOpenInfo.minutesUntilOpen * 60 * 1000));
                     const timeDiff = nextOpenDate - now;
                     
