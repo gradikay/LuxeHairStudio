@@ -560,6 +560,186 @@ backToTopButton.addEventListener('mouseleave', () => removeButtonEffect(backToTo
 backToTopButton.addEventListener('touchstart', () => addButtonEffect(backToTopButton));
 backToTopButton.addEventListener('touchend', () => removeButtonEffect(backToTopButton));
 
+// Store Hours Status System
+class StoreHoursManager {
+    constructor() {
+        this.storeData = null;
+        this.statusElement = document.getElementById('store-status-text');
+        this.hoursElement = document.getElementById('store-hours-today');
+        this.nextChangeElement = document.getElementById('next-status-change');
+        this.init();
+    }
+
+    async init() {
+        try {
+            await this.loadStoreHours();
+            this.updateStatus();
+            // Update every minute
+            setInterval(() => this.updateStatus(), 60000);
+        } catch (error) {
+            console.error('Failed to load store hours:', error);
+            this.showError();
+        }
+    }
+
+    async loadStoreHours() {
+        const response = await fetch('./store-hours.json');
+        if (!response.ok) {
+            throw new Error('Failed to fetch store hours');
+        }
+        this.storeData = await response.json();
+    }
+
+    getCurrentDay() {
+        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        return days[new Date().getDay()];
+    }
+
+    getCurrentTime() {
+        const now = new Date();
+        return {
+            hours: now.getHours(),
+            minutes: now.getMinutes(),
+            timeString: now.toTimeString().substring(0, 5)
+        };
+    }
+
+    timeStringToMinutes(timeString) {
+        const [hours, minutes] = timeString.split(':').map(Number);
+        return hours * 60 + minutes;
+    }
+
+    minutesToTimeString(minutes) {
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        const displayHours = hours > 12 ? hours - 12 : (hours === 0 ? 12 : hours);
+        return `${displayHours}:${mins.toString().padStart(2, '0')} ${ampm}`;
+    }
+
+    isHoliday() {
+        const today = new Date().toISOString().split('T')[0];
+        return this.storeData.specialHours.holidays.find(holiday => holiday.date === today);
+    }
+
+    isVacation() {
+        const today = new Date().toISOString().split('T')[0];
+        return this.storeData.specialHours.vacation.find(vacation => 
+            today >= vacation.startDate && today <= vacation.endDate
+        );
+    }
+
+    updateStatus() {
+        if (!this.storeData) return;
+
+        const currentDay = this.getCurrentDay();
+        const currentTime = this.getCurrentTime();
+        const currentMinutes = currentTime.hours * 60 + currentTime.minutes;
+
+        // Check for special circumstances first
+        const holiday = this.isHoliday();
+        if (holiday && !holiday.isOpen) {
+            this.setStatus('holiday', this.storeData.messages.holiday, `Closed for ${holiday.name}`, '');
+            return;
+        }
+
+        const vacation = this.isVacation();
+        if (vacation) {
+            this.setStatus('vacation', this.storeData.messages.vacation, vacation.reason, '');
+            return;
+        }
+
+        const todayHours = this.storeData.hours[currentDay];
+        
+        if (!todayHours.isOpen) {
+            this.setStatus('closed', this.storeData.messages.closed, 'Closed today', this.getNextOpenTime());
+            return;
+        }
+
+        const openMinutes = this.timeStringToMinutes(todayHours.openTime);
+        const closeMinutes = this.timeStringToMinutes(todayHours.closeTime);
+        const closingSoonThreshold = this.storeData.closingSoonWarning;
+
+        if (currentMinutes >= openMinutes && currentMinutes < closeMinutes) {
+            // Store is open
+            const minutesUntilClose = closeMinutes - currentMinutes;
+            if (minutesUntilClose <= closingSoonThreshold) {
+                const closeTime = this.minutesToTimeString(closeMinutes);
+                this.setStatus('closing-soon', this.storeData.messages.closingSoon, 
+                    `Open until ${closeTime}`, `Closing in ${minutesUntilClose} minutes`);
+            } else {
+                const closeTime = this.minutesToTimeString(closeMinutes);
+                this.setStatus('open', this.storeData.messages.open, 
+                    `Open until ${closeTime}`, '');
+            }
+        } else if (currentMinutes < openMinutes) {
+            // Store is closed but will open today
+            const minutesUntilOpen = openMinutes - currentMinutes;
+            const openTime = this.minutesToTimeString(openMinutes);
+            if (minutesUntilOpen <= 60) {
+                this.setStatus('opening-soon', this.storeData.messages.openingSoon, 
+                    `Opening at ${openTime}`, `Opening in ${minutesUntilOpen} minutes`);
+            } else {
+                this.setStatus('closed', this.storeData.messages.closed, 
+                    `Opening at ${openTime}`, '');
+            }
+        } else {
+            // Store is closed for the day
+            this.setStatus('closed', this.storeData.messages.closed, 'Closed for today', this.getNextOpenTime());
+        }
+
+        this.updateTodayHours(todayHours);
+    }
+
+    setStatus(statusClass, statusText, hoursText, nextChangeText) {
+        // Remove all status classes
+        this.statusElement.className = '';
+        this.statusElement.classList.add(`status-${statusClass}`);
+        this.statusElement.textContent = statusText;
+        this.hoursElement.textContent = hoursText;
+        this.nextChangeElement.textContent = nextChangeText;
+    }
+
+    updateTodayHours(todayHours) {
+        if (todayHours.isOpen) {
+            const openTime = this.minutesToTimeString(this.timeStringToMinutes(todayHours.openTime));
+            const closeTime = this.minutesToTimeString(this.timeStringToMinutes(todayHours.closeTime));
+            // Additional info is handled in setStatus
+        }
+    }
+
+    getNextOpenTime() {
+        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const currentDayIndex = new Date().getDay();
+        
+        for (let i = 1; i <= 7; i++) {
+            const nextDayIndex = (currentDayIndex + i) % 7;
+            const nextDay = days[nextDayIndex];
+            const nextDayHours = this.storeData.hours[nextDay];
+            
+            if (nextDayHours.isOpen) {
+                const dayName = nextDay.charAt(0).toUpperCase() + nextDay.slice(1);
+                const openTime = this.minutesToTimeString(this.timeStringToMinutes(nextDayHours.openTime));
+                if (i === 1) {
+                    return `Opens tomorrow at ${openTime}`;
+                } else {
+                    return `Opens ${dayName} at ${openTime}`;
+                }
+            }
+        }
+        return 'Check back for updates';
+    }
+
+    showError() {
+        this.setStatus('closed', 'Unable to load hours', 'Please call for current hours', '');
+    }
+}
+
+// Initialize store hours manager when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new StoreHoursManager();
+});
+
 // Add mobile-first touch events for all buttons and interactive elements
 document.addEventListener('DOMContentLoaded', () => {
     // CTA buttons

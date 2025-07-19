@@ -476,6 +476,94 @@ body {
     transform: scale(1.1);
 }
 
+/* Store Status Section */
+.store-status {
+    padding: 40px 0;
+    background: linear-gradient(135deg, #2a0a2a 0%, #1a0a1a 50%, #2a0a2a 100%);
+    border-top: 1px solid rgba(255, 105, 180, 0.2);
+    border-bottom: 1px solid rgba(255, 105, 180, 0.2);
+}
+
+.status-widget {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 105, 180, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.status-widget:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+    border-color: rgba(255, 105, 180, 0.5);
+}
+
+.status-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff69b4, #ffb6c1);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+}
+
+.status-content {
+    flex: 1;
+    text-align: left;
+}
+
+.status-content h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.status-content p {
+    color: #e0e0e0;
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+}
+
+/* Status-specific colors */
+.status-open {
+    color: #4CAF50 !important;
+}
+
+.status-closed {
+    color: #f44336 !important;
+}
+
+.status-closing-soon {
+    color: #FF9800 !important;
+    animation: pulse 2s infinite;
+}
+
+.status-opening-soon {
+    color: #2196F3 !important;
+}
+
+.status-holiday, .status-vacation {
+    color: #9C27B0 !important;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
 /* Contact Section */
 .contact {
     padding: 100px 0;
@@ -863,6 +951,27 @@ body {
         height: 56px !important;
         bottom: 20px !important;
         right: 20px !important;
+    }
+    
+    /* Store status mobile responsiveness */
+    .status-widget {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .status-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .status-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .status-content p {
+        font-size: 0.9rem;
     }
 }
 

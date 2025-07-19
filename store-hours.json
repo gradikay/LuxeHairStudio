@@ -1,0 +1,71 @@
+{
+  "businessName": "Luxe Hair Studio",
+  "timezone": "America/New_York",
+  "hours": {
+    "monday": {
+      "isOpen": false,
+      "openTime": null,
+      "closeTime": null
+    },
+    "tuesday": {
+      "isOpen": true,
+      "openTime": "09:00",
+      "closeTime": "19:00"
+    },
+    "wednesday": {
+      "isOpen": true,
+      "openTime": "09:00",
+      "closeTime": "19:00"
+    },
+    "thursday": {
+      "isOpen": true,
+      "openTime": "09:00",
+      "closeTime": "19:00"
+    },
+    "friday": {
+      "isOpen": true,
+      "openTime": "09:00",
+      "closeTime": "19:00"
+    },
+    "saturday": {
+      "isOpen": true,
+      "openTime": "08:00",
+      "closeTime": "18:00"
+    },
+    "sunday": {
+      "isOpen": false,
+      "openTime": null,
+      "closeTime": null
+    }
+  },
+  "specialHours": {
+    "holidays": [
+      {
+        "date": "2025-12-25",
+        "name": "Christmas Day",
+        "isOpen": false
+      },
+      {
+        "date": "2025-01-01",
+        "name": "New Year's Day",
+        "isOpen": false
+      }
+    ],
+    "vacation": [
+      {
+        "startDate": "2025-08-15",
+        "endDate": "2025-08-22",
+        "reason": "Summer Vacation"
+      }
+    ]
+  },
+  "closingSoonWarning": 60,
+  "messages": {
+    "open": "We're Open!",
+    "closed": "We're Closed",
+    "closingSoon": "Closing Soon",
+    "openingSoon": "Opening Soon",
+    "holiday": "Closed for Holiday",
+    "vacation": "Closed for Vacation"
+  }
+}
