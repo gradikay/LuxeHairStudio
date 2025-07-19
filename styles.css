@@ -478,22 +478,20 @@ body {
 
 /* Store Status Section */
 .store-status {
-    padding: 40px 0;
-    background: linear-gradient(135deg, #2a0a2a 0%, #1a0a1a 50%, #2a0a2a 100%);
-    border-top: 1px solid rgba(255, 105, 180, 0.2);
-    border-bottom: 1px solid rgba(255, 105, 180, 0.2);
+    padding: 20px 0;
+    background: transparent;
 }
 
 .status-widget {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
-    max-width: 500px;
+    gap: 0.8rem;
+    max-width: 350px;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
+    padding: 0.8rem 1.2rem;
+    background: rgba(255, 105, 180, 0.1);
+    border-radius: 15px;
     border: 1px solid rgba(255, 105, 180, 0.3);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
@@ -506,16 +504,7 @@ body {
 }
 
 .status-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ff69b4, #ffb6c1);
-    color: #fff;
-    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
-    position: relative;
+    display: none;
 }
 
 .bell-icon {
@@ -539,16 +528,15 @@ body {
 
 .status-content {
     flex: 1;
-    text-align: left;
+    text-align: center;
 }
 
 .status-content h3 {
     font-family: 'Dancing Script', cursive;
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.2rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    animation: glow 3s ease-in-out infinite alternate;
     background: none !important;
     background-color: transparent !important;
     padding: 0 !important;
@@ -569,8 +557,8 @@ body {
 
 .status-content p {
     color: #e0e0e0;
-    margin-bottom: 0.3rem;
-    font-size: 0.95rem;
+    margin-bottom: 0.1rem;
+    font-size: 0.85rem;
 }
 
 /* Status-specific colors */
@@ -613,13 +601,13 @@ body {
 
 /* Countdown Timer Styles */
 .countdown-timer {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
+    margin-top: 0.8rem;
+    padding: 1rem;
     background: linear-gradient(135deg, rgba(255, 105, 180, 0.15), rgba(255, 20, 147, 0.15));
-    border-radius: 20px;
-    border: 2px solid rgba(255, 105, 180, 0.4);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 105, 180, 0.4);
     text-align: center;
-    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
     animation: timerPulse 3s ease-in-out infinite;
     position: relative;
     overflow: visible;
@@ -629,13 +617,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 8px;
+    margin-bottom: 10px;
 }
 
 .countdown-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #ff69b4;
     text-shadow: 0 2px 10px rgba(255, 105, 180, 0.6);
@@ -644,6 +632,8 @@ body {
 .bell-icon {
     color: #ff69b4;
     filter: drop-shadow(0 2px 10px rgba(255, 105, 180, 0.6));
+    width: 18px;
+    height: 18px;
 }
 
 .shake-bell {
@@ -669,11 +659,11 @@ body {
 
 .timer-display {
     font-family: 'Dancing Script', cursive;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #ff69b4;
     text-shadow: 0 3px 15px rgba(255, 105, 180, 0.6);
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
     animation: numberBounce 1s infinite;
 }
 
@@ -684,13 +674,13 @@ body {
 }
 
 .timer-label {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #ffb6c1;
     margin: 0;
     font-style: italic;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     animation: labelGlow 2s ease-in-out infinite alternate;
 }
 
@@ -701,14 +691,14 @@ body {
 
 .timer-display span {
     display: inline-block;
-    min-width: 50px;
+    min-width: 35px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 105, 180, 0.1));
-    border-radius: 12px;
-    padding: 0.3rem 0.5rem;
-    margin: 0 0.2rem;
+    border-radius: 8px;
+    padding: 0.2rem 0.3rem;
+    margin: 0 0.1rem;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+    box-shadow: 0 3px 10px rgba(255, 105, 180, 0.3);
     animation: digitFlip 0.6s ease-in-out;
 }
 
@@ -1163,10 +1153,10 @@ body {
     
     /* Store status mobile responsiveness */
     .status-widget {
-        flex-direction: column;
+        flex-direction: row;
         text-align: center;
-        gap: 1rem;
-        padding: 1.5rem;
+        gap: 0.6rem;
+        padding: 0.6rem 1rem;
     }
     
     .status-icon {
