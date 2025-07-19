@@ -906,6 +906,16 @@ class StoreHoursManager {
             this.bellIcon.style.display = 'none';
             this.clockIcon.style.display = 'block';
         }
+        
+        // Add phone shake animation when store is open
+        const phoneIcon = document.getElementById('phone-icon');
+        if (phoneIcon) {
+            if (statusClass === 'open') {
+                phoneIcon.classList.add('shake-phone');
+            } else {
+                phoneIcon.classList.remove('shake-phone');
+            }
+        }
     }
 
     updateTodayHours(todayHours) {

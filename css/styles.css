@@ -911,6 +911,16 @@ body {
     20%, 40% { transform: rotate(15deg); }
 }
 
+.shake-phone {
+    animation: shake-phone 1.2s infinite;
+}
+
+@keyframes shake-phone {
+    0%, 100% { transform: rotate(0deg); }
+    10%, 30%, 50%, 70%, 90% { transform: rotate(-8deg); }
+    20%, 40%, 60%, 80% { transform: rotate(8deg); }
+}
+
 @keyframes timerPulse {
     0%, 100% { 
         transform: scale(1);
