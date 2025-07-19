@@ -145,7 +145,7 @@ this.storeData = {
 - 💚 **"We're Open!"** with sparkly animations when you're open
 - 🔴 **"We're Closed"** when you're closed for the day
 - 🔔 **"Closing Soon"** with a shaking bell and countdown timer
-- 🌅 **"Opening Soon"** when you open within an hour
+- 🌅 **"Opening Soon"** when you open within 12 hours
 - 🎄 **"Closed for Holiday"** on special days
 
 ---
@@ -156,6 +156,7 @@ this.storeData = {
 - Check your computer's time zone is correct
 - Make sure `closingSoonWarning` is set to 60 or higher
 - Verify your closing time is in 24-hour format (19:00, not 7:00 PM)
+- **Opening Soon countdown only shows if opening within 12 hours** (prevents confusing 57+ hour countdowns)
 
 ### "Wrong status is showing"
 - Double-check today's hours are set correctly
