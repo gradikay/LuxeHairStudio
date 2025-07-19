@@ -943,8 +943,14 @@ class StoreHoursManager {
                     `Opening at ${openTime}`, '');
             }
         } else {
-            // Store is closed for the day
-            this.setStatus('closed', this.storeData.messages.closed, 'Closed for today', this.getNextOpenTime());
+            // Store is closed for the day - check next opening
+            const nextOpenInfo = this.getNextOpenTimeDetailed();
+            if (nextOpenInfo && nextOpenInfo.minutesUntilOpen <= 720) { // Show countdown if opening within 12 hours
+                this.setStatus('opening-soon', this.storeData.messages.openingSoon, 
+                    nextOpenInfo.message, `Opening in ${Math.floor(nextOpenInfo.minutesUntilOpen / 60)}h ${nextOpenInfo.minutesUntilOpen % 60}m`);
+            } else {
+                this.setStatus('closed', this.storeData.messages.closed, 'Closed for today', this.getNextOpenTime());
+            }
         }
 
         this.updateTodayHours(todayHours);
@@ -1011,6 +1017,39 @@ class StoreHoursManager {
         return 'Check back for updates';
     }
 
+    getNextOpenTimeDetailed() {
+        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const now = new Date();
+        const currentDayIndex = now.getDay();
+        
+        for (let i = 1; i <= 7; i++) {
+            const nextDayIndex = (currentDayIndex + i) % 7;
+            const nextDay = days[nextDayIndex];
+            const nextDayHours = this.storeData.hours[nextDay];
+            
+            if (nextDayHours.isOpen) {
+                const nextOpenDate = new Date(now);
+                nextOpenDate.setDate(now.getDate() + i);
+                const openMinutes = this.timeStringToMinutes(nextDayHours.openTime);
+                nextOpenDate.setHours(Math.floor(openMinutes / 60), openMinutes % 60, 0, 0);
+                
+                const minutesUntilOpen = Math.floor((nextOpenDate - now) / (1000 * 60));
+                const dayName = nextDay.charAt(0).toUpperCase() + nextDay.slice(1);
+                const openTime = this.minutesToTimeString(openMinutes);
+                
+                const message = i === 1 ? `Opens tomorrow at ${openTime}` : `Opens ${dayName} at ${openTime}`;
+                
+                return {
+                    minutesUntilOpen: minutesUntilOpen,
+                    message: message,
+                    dayName: dayName,
+                    openTime: openTime
+                };
+            }
+        }
+        return null;
+    }
+
     updateCountdown() {
         const now = new Date();
         const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -1031,7 +1070,7 @@ class StoreHoursManager {
         const closeMinutes = this.timeStringToMinutes(todayHours.closeTime);
         const closingSoonThreshold = this.storeData.closingSoonWarning;
 
-        // Only show countdown if store is open and closing soon
+        // Show countdown for closing soon OR opening soon
         if (currentMinutes >= openMinutes && currentMinutes < closeMinutes) {
             const minutesUntilClose = closeMinutes - currentMinutes;
             
@@ -1066,7 +1105,38 @@ class StoreHoursManager {
                 countdownContainer.style.display = 'none';
             }
         } else {
-            countdownContainer.style.display = 'none';
+            // Store is closed - check if we should show opening countdown
+            const statusElement = document.getElementById('store-status-text');
+            if (statusElement && statusElement.classList.contains('status-opening-soon')) {
+                const nextOpenInfo = this.getNextOpenTimeDetailed();
+                if (nextOpenInfo && nextOpenInfo.minutesUntilOpen <= 720) { // Show countdown if opening within 12 hours
+                    const nextOpenDate = new Date(now.getTime() + (nextOpenInfo.minutesUntilOpen * 60 * 1000));
+                    const timeDiff = nextOpenDate - now;
+                    
+                    if (timeDiff > 0) {
+                        const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
+                        const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                        const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                        
+                        // Update timer display
+                        const timerHours = document.getElementById('timer-hours');
+                        const timerMinutes = document.getElementById('timer-minutes');
+                        const timerSeconds = document.getElementById('timer-seconds');
+                        
+                        if (timerHours) timerHours.textContent = hoursLeft.toString().padStart(2, '0');
+                        if (timerMinutes) timerMinutes.textContent = minutesLeft.toString().padStart(2, '0');
+                        if (timerSeconds) timerSeconds.textContent = secondsLeft.toString().padStart(2, '0');
+                        
+                        countdownContainer.style.display = 'block';
+                    } else {
+                        countdownContainer.style.display = 'none';
+                    }
+                } else {
+                    countdownContainer.style.display = 'none';
+                }
+            } else {
+                countdownContainer.style.display = 'none';
+            }
         }
     }
 
