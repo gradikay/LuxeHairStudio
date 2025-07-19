@@ -1,3 +1,7 @@
+/* ========================================
+   NAVIGATION & MOBILE MENU FUNCTIONALITY
+   ======================================== */
+
 // DOM Elements
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -25,7 +29,10 @@ navLinks.forEach(link => {
     });
 });
 
-// Smooth Scrolling Function
+/* ========================================
+   SMOOTH SCROLLING & NAVIGATION
+   ======================================== */
+
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -454,11 +461,9 @@ modalStyles.textContent = `
 `;
 document.head.appendChild(modalStyles);
 
-// Simple HTTP server setup for port 5000
-const PORT = 5000;
-const HOST = '0.0.0.0';
-
-// Hero Carousel Functionality
+/* ========================================
+   HERO CAROUSEL FUNCTIONALITY
+   ======================================== */
 class HeroCarousel {
     constructor() {
         this.slides = document.querySelectorAll('.hero-slide');
@@ -609,10 +614,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// This would typically be handled by a web server
-console.log(`Hair salon website ready to serve on http://${HOST}:${PORT}`);
+/* ========================================
+   WEBSITE INITIALIZATION
+   ======================================== */
 
-// Loading screen simulation
+// Website ready notification
+console.log('Hair salon website ready to serve on http://0.0.0.0:5000');
+
+// Smooth loading animation
 window.addEventListener('load', () => {
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.5s ease';
@@ -621,8 +630,6 @@ window.addEventListener('load', () => {
         document.body.style.opacity = '1';
     }, 100);
 });
-
-// Intersection Observer for counting animations (if needed for stats)
 const countElements = document.querySelectorAll('[data-count]');
 const countObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

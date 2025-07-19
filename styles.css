@@ -1,4 +1,23 @@
-/* Reset and Base Styles */
+/* ========================================
+   LUXE HAIR STUDIO - STYLESHEET
+   
+   A modern, responsive hair salon website
+   Built with pure CSS - no frameworks
+   
+   Table of Contents:
+   1. Reset & Base Styles
+   2. Navigation
+   3. Hero Section & Carousel
+   4. Store Hours Status
+   5. Gallery Section
+   6. Contact Section
+   7. Animations & Effects
+   8. Mobile Responsive Design
+   ======================================== */
+
+/* ========================================
+   1. RESET & BASE STYLES
+   ======================================== */
 * {
     margin: 0;
     padding: 0;
@@ -23,7 +42,9 @@ body {
     padding: 0 20px;
 }
 
-/* Navigation */
+/* ========================================
+   2. NAVIGATION
+   ======================================== */
 .navbar {
     position: fixed;
     top: 0;
@@ -125,7 +146,9 @@ body {
     border-radius: 2px;
 }
 
-/* Hero Section */
+/* ========================================
+   3. HERO SECTION & CAROUSEL
+   ======================================== */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -396,7 +419,9 @@ body {
     }
 }
 
-/* Section Titles */
+/* ========================================
+   4. STORE HOURS STATUS WIDGET
+   ======================================== */
 .section-title {
     font-family: 'Great Vibes', cursive;
     font-size: 3rem;
@@ -558,7 +583,9 @@ body {
     border: 1px solid rgba(255, 105, 180, 0.3);
 }
 
-/* Gallery Section */
+/* ========================================
+   5. GALLERY SECTION
+   ======================================== */
 .gallery {
     padding: 100px 0;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a0a 100%);
@@ -640,7 +667,11 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Salon Interior Section */
+/* ========================================
+   6. CONTACT SECTION & FORMS
+   ======================================== */
+
+/* Contact Section */
 .salon-interior {
     padding: 100px 0;
     background: linear-gradient(135deg, #000000 0%, #2a0a2a 50%, #000000 100%);
@@ -675,7 +706,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Store Status Section */
 .store-status {
     padding: 20px 0;
     background: transparent;
@@ -1195,7 +1225,9 @@ body {
     }
 }
 
-/* Mobile-First Responsive Design */
+/* ========================================
+   8. MOBILE RESPONSIVE DESIGN
+   ======================================== */
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
