@@ -215,8 +215,8 @@ body {
 .hero-carousel {
     position: relative;
     width: 100%;
-    max-width: 500px;
-    height: 600px;
+    max-width: 100%;
+    height: auto;
     overflow: hidden;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
@@ -240,9 +240,8 @@ body {
 }
 
 .hero-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    height: auto;
     border-radius: 20px;
     transition: all 0.3s ease;
 }
@@ -303,12 +302,6 @@ body {
     
     .hero-carousel-container {
         order: 1;
-        max-width: 350px;
-    }
-    
-    .hero-carousel {
-        height: 400px;
-        max-width: 300px;
     }
     
     .hero-title {
@@ -329,11 +322,6 @@ body {
 }
 
 @media (max-width: 480px) {
-    .hero-carousel {
-        height: 350px;
-        max-width: 280px;
-    }
-    
     .hero-title {
         font-size: 2rem;
     }
