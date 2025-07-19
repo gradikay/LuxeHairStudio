@@ -748,7 +748,79 @@ backToTopButton.addEventListener('touchend', () => removeButtonEffect(backToTopB
 // Store Hours Status System
 class StoreHoursManager {
     constructor() {
-        this.storeData = null;
+        // Embedded store data for static hosting compatibility
+        this.storeData = {
+            "businessName": "Luxe Hair Studio",
+            "timezone": "America/New_York",
+            "hours": {
+                "monday": {
+                    "isOpen": false,
+                    "openTime": null,
+                    "closeTime": null
+                },
+                "tuesday": {
+                    "isOpen": true,
+                    "openTime": "09:00",
+                    "closeTime": "18:30"
+                },
+                "wednesday": {
+                    "isOpen": true,
+                    "openTime": "09:00",
+                    "closeTime": "19:00"
+                },
+                "thursday": {
+                    "isOpen": true,
+                    "openTime": "09:00",
+                    "closeTime": "19:00"
+                },
+                "friday": {
+                    "isOpen": true,
+                    "openTime": "09:00",
+                    "closeTime": "19:00"
+                },
+                "saturday": {
+                    "isOpen": true,
+                    "openTime": "08:00",
+                    "closeTime": "19:25"
+                },
+                "sunday": {
+                    "isOpen": false,
+                    "openTime": null,
+                    "closeTime": null
+                }
+            },
+            "specialHours": {
+                "holidays": [
+                    {
+                        "date": "2025-12-25",
+                        "name": "Christmas Day",
+                        "isOpen": false
+                    },
+                    {
+                        "date": "2025-01-01",
+                        "name": "New Year's Day",
+                        "isOpen": false
+                    }
+                ],
+                "vacation": [
+                    {
+                        "startDate": "2025-08-15",
+                        "endDate": "2025-08-22",
+                        "reason": "Summer Vacation"
+                    }
+                ]
+            },
+            "closingSoonWarning": 60,
+            "messages": {
+                "open": "We're Open!",
+                "closed": "We're Closed",
+                "closingSoon": "Closing Soon",
+                "openingSoon": "Opening Soon",
+                "holiday": "Closed for Holiday",
+                "vacation": "Closed for Vacation"
+            }
+        };
+        
         this.statusElement = document.getElementById('store-status-text');
         this.hoursElement = document.getElementById('store-hours-today');
         this.nextChangeElement = document.getElementById('next-status-change');
@@ -763,26 +835,17 @@ class StoreHoursManager {
         this.init();
     }
 
-    async init() {
+    init() {
         try {
-            await this.loadStoreHours();
             this.updateStatus();
             // Update every minute
             setInterval(() => this.updateStatus(), 60000);
             // Update countdown every second
             setInterval(() => this.updateCountdown(), 1000);
         } catch (error) {
-            console.error('Failed to load store hours:', error);
+            console.error('Failed to initialize store hours:', error);
             this.showError();
         }
-    }
-
-    async loadStoreHours() {
-        const response = await fetch('./store-hours.json?v=' + Date.now());
-        if (!response.ok) {
-            throw new Error('Failed to fetch store hours');
-        }
-        this.storeData = await response.json();
     }
 
     getCurrentDay() {
