@@ -7,6 +7,7 @@ This is a static website for "Luxe Hair Studio," a premium hair salon. The proje
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Use SVG icons instead of emojis for professional appearance.
 
 ## System Architecture
 

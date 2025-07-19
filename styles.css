@@ -263,8 +263,17 @@ body {
 }
 
 .credential-icon {
-    font-size: 1.5rem;
     margin-right: 1rem;
+    color: #ff69b4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+}
+
+.credential-icon svg {
+    color: #ff69b4;
+    filter: drop-shadow(0 2px 4px rgba(255, 105, 180, 0.3));
 }
 
 .about-image {
@@ -480,8 +489,22 @@ body {
 }
 
 .info-icon {
-    font-size: 1.5rem;
     min-width: 30px;
+    color: #ff69b4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-icon svg {
+    color: #ff69b4;
+    filter: drop-shadow(0 2px 4px rgba(255, 105, 180, 0.3));
+    transition: all 0.3s ease;
+}
+
+.info-item:hover .info-icon svg {
+    transform: scale(1.1);
+    color: #ffb6c1;
 }
 
 .info-details h4 {
@@ -608,11 +631,26 @@ body {
     border-radius: 25px;
     border: 1px solid rgba(255, 105, 180, 0.3);
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.social-link svg {
+    color: #ff69b4;
+    transition: all 0.3s ease;
 }
 
 .social-link:hover {
     background: rgba(255, 105, 180, 0.3);
     transform: translateY(-2px);
+    color: #ffb6c1;
+}
+
+.social-link:hover svg {
+    color: #ffb6c1;
+    transform: scale(1.1);
 }
 
 .footer-links {
