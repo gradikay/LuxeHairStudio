@@ -303,12 +303,16 @@ body {
     
     .hero-carousel-container {
         order: 1;
-        max-width: 350px;
+        width: 100%;
+        max-width: 90%;
+        margin: 0 auto;
     }
     
     .hero-carousel {
-        height: 300px;
-        max-width: 300px;
+        height: 280px;
+        max-width: 100%;
+        width: 100%;
+        aspect-ratio: 4/3;
     }
     
     .hero-title {
@@ -329,9 +333,13 @@ body {
 }
 
 @media (max-width: 480px) {
+    .hero-carousel-container {
+        max-width: 95%;
+    }
+    
     .hero-carousel {
-        height: 250px;
-        max-width: 280px;
+        height: 220px;
+        aspect-ratio: 3/2;
     }
     
     .hero-title {
@@ -341,6 +349,15 @@ body {
     .cta-button {
         padding: 15px 30px;
         font-size: 1.1rem;
+    }
+    
+    .hero-carousel-dots {
+        margin-top: 1rem;
+    }
+    
+    .hero-dot {
+        width: 12px;
+        height: 12px;
     }
 }
 
