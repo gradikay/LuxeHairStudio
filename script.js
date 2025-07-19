@@ -593,7 +593,7 @@ class StoreHoursManager {
     }
 
     async loadStoreHours() {
-        const response = await fetch('./store-hours.json');
+        const response = await fetch('./store-hours.json?v=' + Date.now());
         if (!response.ok) {
             throw new Error('Failed to fetch store hours');
         }
@@ -771,8 +771,11 @@ class StoreHoursManager {
         const minutesUntilClose = closeMinutes - currentMinutes;
         const warningMinutes = this.storeData.closingSoonWarning || 60;
 
+        console.log('Debug:', {currentMinutes, closeMinutes, minutesUntilClose, warningMinutes});
+        
         if (minutesUntilClose > 0 && minutesUntilClose <= warningMinutes) {
             // Show countdown
+            console.log('Showing countdown timer!');
             this.countdownElement.style.display = 'block';
             
             const now = new Date();

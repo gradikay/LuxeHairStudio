@@ -59,7 +59,7 @@
       }
     ]
   },
-  "closingSoonWarning": 120,
+  "closingSoonWarning": 60,
   "messages": {
     "open": "We're Open!",
     "closed": "We're Closed",
