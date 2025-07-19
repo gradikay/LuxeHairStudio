@@ -44,7 +44,20 @@ body {
     align-items: center;
 }
 
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-icon {
+    color: #ff69b4;
+    flex-shrink: 0;
+    filter: drop-shadow(2px 2px 4px rgba(255, 105, 180, 0.3));
+}
+
 .nav-logo h2 {
+    margin: 0;
     font-family: 'Great Vibes', cursive;
     font-size: 2rem;
     color: #ff69b4;
