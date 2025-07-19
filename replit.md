@@ -131,6 +131,8 @@ Buttons should be very girly with sparkle effects, gradients, and handwritten fo
 - Created custom contact links with white styling that remain functional for phone calls and emails
 - Added comprehensive security script to protect against inspection tools and content copying
 - Fixed store hours countdown timer to use actual closing times instead of hardcoded values
+- Corrected "Opening Soon" logic to only display within 12 hours for sensible user experience
+- Resolved confusing 23+ hour countdown by implementing proper closed/opening status transitions
 
 ## Technical Notes
 
