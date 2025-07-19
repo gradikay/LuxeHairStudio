@@ -1,0 +1,59 @@
+💅 SPARKLE NAILS - SUPER GIRLY NAIL SALON WEBSITE TEMPLATE 💅
+
+This modern, feminine website template is perfect for nail salons, beauty spas, and manicure businesses looking for a super girly online presence! Featuring a beautiful pink and purple color scheme, interactive elements, and a fully responsive design that works on all devices.
+
+✨ WHAT'S INCLUDED ✨
+
+This listing includes TWO zip files:
+1. Main Website Code - All HTML, CSS, and JavaScript files ready to customize
+2. Assets Package - All images and graphics used in the template
+Note: Just add the assets folder SparkleNails-main
+
+🎀 KEY FEATURES 🎀
+
+• Super girly design with pink and purple tones
+• Fully responsive layout for mobile, tablet and desktop
+• Interactive buttons with mobile touch feedback
+• Beautiful animations and hover effects
+• Image gallery with filtering options
+• Lazy loading for optimal performance
+• SEO-optimized structure
+• Contact form with validation
+• Accessibility enhancements
+• Multi-page design (not a single page site)
+• Clear documentation for easy customization
+
+📱 PAGES INCLUDED 📱
+
+• Home page with hero section, featured services, and testimonials
+• Services page with detailed service descriptions and pricing
+• Gallery page with categorized nail designs
+• About page with salon story and team members
+• Contact page with form and location details
+• Booking page with appointment scheduling form
+
+💻 TECHNICAL DETAILS 💻
+
+• HTML5, CSS3, and vanilla JavaScript (no frameworks required)
+• Lightweight and fast-loading design
+• Cross-browser compatible
+• Mobile-first approach
+• Easy to customize colors, images, and content
+• Well-commented code for easy editing
+
+🛠️ EASY TO CUSTOMIZE 🛠️
+
+This template comes with detailed instructions on how to customize:
+• Text content
+• Images
+• Colors and fonts
+• Layout sections
+• Service offerings
+
+No coding experience needed for basic customization!
+
+⭐ SUPPORT ⭐
+
+Instructions included in the ***README.md*** file. If you need assistance with the template, please feel free to message me.
+
+NOTE: This is a digital template only. You will need to upload it to your own web hosting service to make it live on the internet. No physical product will be shipped.
