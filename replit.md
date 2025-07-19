@@ -120,6 +120,8 @@ Buttons should be very girly with sparkle effects, gradients, and handwritten fo
 - Updated all alt text descriptions for better accessibility and SEO optimization
 - Professional folder structure reorganization: index.html in root, css/, js/, and assets/images/ directories
 - All file paths updated to follow standard web development organization patterns
+- Implemented lazy loading for all images except the first hero image for optimal page load performance
+- Fixed gallery touch events to prevent modal opening during scroll gestures
 
 ## Technical Notes
 
